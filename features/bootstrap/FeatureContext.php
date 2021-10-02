@@ -1,4 +1,5 @@
 <?php
+
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
@@ -13,10 +14,13 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theUserNavigatesToHttpsBirzhaTech()
     {
-
-        $session = $this->getSession();
-        $session->visit($this->locatePath('/'));
-        echo $this->getSession()->getCurrentUrl();
+        try {
+            $session = $this->getSession();
+            $session->visit($this->locatePath('/'));
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -25,14 +29,17 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function theObjectLogoShouldBeVisible()
     {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.container .logo');
 
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('css', '.container .logo');
-
-        if ($element[0]->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -42,14 +49,18 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function theValueOfAttributeSrcOfObjectLogoShouldBeEqualToImagesLogoPng()
     {
-        $page = $this->getSession()->getPage();
+        try {
+            $page = $this->getSession()->getPage();
 
-        $element = $page->find('css', '.logo');
+            $element = $page->find('css', '.logo');
 
-        if ($element->getAttribute('src') == '/images/logo.png') {
-            echo 'PASSED';
-        } else {
-            var_dump($element->getAttribute('src'));
+            if ($element->getAttribute('src') == '/images/logo.png') {
+                echo 'PASSED';
+            } else {
+                var_dump($element->getAttribute('src'));
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -60,13 +71,17 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function theObjectMenuShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('css', '.menu');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.menu');
 
-        if ($element[0]->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -76,13 +91,17 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function theObjectLanguageShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('css', '.language');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.language');
 
-        if ($element[0]->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -124,13 +143,17 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function theButtonLoginShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('css', '.login');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.login');
 
-        if ($element[0]->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -406,14 +429,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForInputpasswordShouldBeParol()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->findAll('xpath', '//*[@id="registration_form_plainPassword"]');
-        foreach ($elements as $element) {
-            if ($element->getText() == 'Пароль') {
-                echo 'PASSED' . " " . $element->getText();
-            } else {
-                echo 'FALSE' . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('xpath', '//*[@id="registration_form_plainPassword"]');
+            foreach ($elements as $element) {
+                if ($element->getValue() == 'Пароль') {
+                    echo 'PASSED' . " " . $element->getValue();
+                } else {
+                    echo 'FALSE' . $element->getValue();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -517,14 +544,19 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theValueOfOfObjectInputLoginShouldBeEqualTo380000000000()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->findAll('css', '.inputLogin .data-mask');
-        foreach ($elements as $element) {
-            if ($element[0]->getText() == '+38(000)00-00-00-0') {
-                echo 'PASSED' . " " . $element->getText();
-            } else {
-                echo 'FALSE' . " " . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+//            $elements = $page->findAll('css', '.inputLogin .data-mask');
+            $elements = $page->findAll('xpath', '//*[@id="registration_form_login"]');
+            foreach ($elements as $element) {
+                if ($element[0]->getValue() == '+38(000)00-00-00-0') {
+                    echo 'PASSED' . " " . $element->getValue();
+                } else {
+                    echo 'FALSE' . " " . $element->getValue();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -533,8 +565,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theCurrentUrlShouldBeEqualToHttpsBirzhaTechLogin()
     {
-        if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/login') {
-            echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/login') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -543,10 +579,14 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theCurrentURLShouldBeEqualToHttpsBirzhaTechRegister()
     {
-        if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/register') {
-            echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
-        } else {
-            echo 'FALSE';
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/register') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+            } else {
+                echo 'FALSE';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -555,12 +595,16 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theNameOfTheObjectPageTitleShouldBeEqualToРЕЄСТРАЦІЯ()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->find('css', 'h1');
-        if ($elements->getText() == 'РЕЄСТРАЦІЯ') {
-            echo 'PASSED' . " " . $elements->getText();
-        } else {
-            echo 'FALSE' . $elements->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'h1');
+            if ($elements->getText() == 'РЕЄСТРАЦІЯ') {
+                echo 'PASSED' . " " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
 
     }
@@ -570,13 +614,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectInputEmailShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('xpath', '//*[@id="registration_form_email"]');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('xpath', '//*[@id="registration_form_email"]');
 
-        if ($element[0]->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -585,15 +633,19 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForInputEmailShouldBeEmail()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->find('xpath', '//*[@id="registration_form"]/div[2]/label');
-        foreach ($elements as $element) {
-            if ($element->getText() == 'Email') {
-                echo 'PASSED' . " " . $element->getText();
-                var_dump($element);
-            } else {
-                echo 'FALSE' . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('xpath', '//*[@id="registration_form"]/div[2]/label');
+            foreach ($elements as $element) {
+                if ($element->getText() == 'Email') {
+                    echo 'PASSED' . " " . $element->getText();
+                    var_dump($element);
+                } else {
+                    echo 'FALSE' . $element->getText();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
 
     }
@@ -603,15 +655,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectTermsCheckboxShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-//        $element = $page->findAll('css', '.registration_form_agreeTerms');
-        $element = $page->find('xpath', '//*[@id="registration_form_agreeTerms"]');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="registration_form_agreeTerms"]');
 
 
-        if ($element->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -620,14 +675,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelOfOfObjectTermsCheckboxShouldBeEqualToЯПідтверджуюСвоюЗгоду()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->find('xpath', '//*[@id="registration_form"]/div[4]/label');
-        foreach ($elements as $element) {
-            if ($element->getText() === 'Я підтверджую свою згоду') {
-                echo 'PASSED' . " " . $element->getText();
-            } else {
-                echo 'FALSE' . " " . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('xpath', '//*[@id="registration_form"]/div[4]/label');
+            foreach ($elements as $element) {
+                if ($element->getValue() == 'Я підтверджую свою згоду') {
+                    echo 'PASSED' . " " . $element->getValue();
+                } else {
+                    echo 'FALSE' . " " . $element->getValue();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -636,14 +695,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theUserClicksOnObjectRegisterSubmit()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->findAll('css', '.registration_form_submit');
-        foreach ($elements as $item) {
-            if ($item->isVisible()) {
-                $item->click();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('xpath', '//*[@id="registration_form_submit"]');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+                echo $this->getSession()->getCurrentUrl();
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
-        echo $this->getSession()->getCurrentUrl();
     }
 
     /**
@@ -651,13 +714,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectRegisterPageTitleShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
+        try {
+            $page = $this->getSession()->getPage();
 
-        $element = $page->find('css', 'h1');
-        if ($element->isVisible()) {
-            echo 'VISIBLE' . " " . $element->getText();
-        } else {
-            echo 'NOT FOUND';
+            $element = $page->find('css', 'h1');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -666,12 +733,16 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectRegisterInputLoginShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->find('xpath', '//*[@id="registration_form_login"]');
-        if ($element->isVisible()) {
-            echo 'VISIBLE' . " " . $element->getText();
-        } else {
-            echo 'NOT FOUND';
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="registration_form_login"]');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -680,15 +751,19 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForRegisterInputLoginShouldBeЛогін()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->find('xpath', '//*[@id="registration_form"]/div[1]/label');
-        foreach ($elements as $element) {
-            if ($element->getText() == 'Логін') {
-                echo 'PASSED' . " " . $element->getText();
-                var_dump($element);
-            } else {
-                echo 'FALSE' . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('xpath', '//*[@id="registration_form"]/div[1]/label');
+            foreach ($elements as $element) {
+                if ($element->getText() == 'Логін') {
+                    echo 'PASSED' . " " . $element->getText();
+                    var_dump($element);
+                } else {
+                    echo 'FALSE' . $element->getText();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -697,14 +772,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theValueOfOfObjectRegisterInputLoginShouldBeEqualTo380000000000()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->findAll('css', '.registration_form_login');
-        foreach ($elements as $element) {
-            if ($element[0]->getText() == '+38(000)00-00-00-0') {
-                echo 'PASSED' . " " . $element->getText();
-            } else {
-                echo 'FALSE' . " " . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.registration_form_login');
+            foreach ($elements as $element) {
+                if ($element[0]->getText() == '+38(000)00-00-00-0') {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . " " . $element->getText();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -713,13 +792,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectRegisterInputPasswordShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->find('xpath', '//*[@id="registration_form_plainPassword"]');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="registration_form_plainPassword"]');
 
-        if ($element->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+            if ($element->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -728,14 +811,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForRegisterInputPasswordShouldBeПароль()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->findAll('xpath', '//*[@id="registration_form"]/div[3]/label');
-        foreach ($elements as $element) {
-            if ($element->getText() == 'Пароль') {
-                echo 'PASSED' . " " . $element->getText();
-            } else {
-                echo 'FALSE' . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('xpath', '//*[@id="registration_form"]/div[3]/label');
+            foreach ($elements as $element) {
+                if ($element->getText() == 'Пароль') {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . $element->getText();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -744,14 +831,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theValueOfOfObjectRegisterInputPasswordShouldBeEqualToNULL()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->find('xpath', '//*[@id="registration_form_plainPassword"]');
-        foreach ($elements as $element) {
-            if ($element->getText() == NULL) {
-                echo 'PASSED' . " " . $element->getText();
-            } else {
-                echo 'FALSE' . " " . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('xpath', '//*[@id="registration_form_plainPassword"]');
+            foreach ($elements as $element) {
+                if ($element->getText() == NULL) {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . " " . $element->getText();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -760,14 +851,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theValueOfOfObjectInputEmailShouldBeEqualToNULL()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->find('xpath', '//*[@id="registration_form_email"]');
-        foreach ($elements as $element) {
-            if ($element->getText() == NULL) {
-                echo 'PASSED';
-            } else {
-                echo 'FALSE' . " " . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('xpath', '//*[@id="registration_form_email"]');
+            foreach ($elements as $element) {
+                if ($element->getText() == NULL) {
+                    echo 'PASSED';
+                } else {
+                    echo 'FALSE' . " " . $element->getText();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -777,17 +872,16 @@ class FeatureContext extends RawMinkContext implements Context
     public function fillTheRegisterInputLoginWithValue380673548514()
     {
         try {
-
             $page = $this->getSession()->getPage();
-            $element = $page->find('сss', '.inputLogin');
-
+            $element = $page->find('xpath', '//*[@id="registration_form_login"]');
             if ($element->isVisible()) {
                 $element->setValue('+38(067)354-85-14');
+                echo $element->getValue();
             } else {
                 echo 'NOT FOUND';
             }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -796,7 +890,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function fillTheRegisterInputPasswordWithValueTest1111()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="registration_form_plainPassword"]');
+            if ($element->isVisible()) {
+                $element->setValue('123456789');
+            } else {
+                echo 'NOT FOUND';
+            }
+            echo $element->getValue();
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -804,7 +909,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function fillTheInputEmailWithValueWhiletablesitsGmailCom()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="registration_form_email"]');
+            if ($element->isVisible()) {
+                $element->setValue('whiletablesits@gmail.com');
+            } else {
+                echo 'NOT FOUND';
+            }
+            echo $element->getValue();
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -812,7 +928,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function clickOnObjectTermsCheckbox()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.checkbox');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -820,15 +946,19 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function fillTheInputLoginWithValue380673548514()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->find('xpath', '//*[@id="inputLogin"]');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="inputLogin"]');
 
-        if ($element->isVisible()) {
-            $element->setValue('+38(095)470-04-86');
-        } else {
-            echo 'NOT FOUND';
+            if ($element->isVisible()) {
+                $element->setValue('+38(095)470-04-86');
+            } else {
+                echo 'NOT FOUND';
+            }
+            echo $element->getValue();
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
-        echo $element->getText();
     }
 
     /**
@@ -836,14 +966,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function fillTheInputPasswordWithValueTest1111()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->find('xpath', '//*[@id="inputPassword"]');
-        if ($element->isVisible()) {
-            $element->setValue('123456789');
-        } else {
-            echo 'NOT FOUND';
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="inputPassword"]');
+            if ($element->isVisible()) {
+                $element->setValue('123456789');
+            } else {
+                echo 'NOT FOUND';
+            }
+            echo $element->getValue();
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
-        echo $element->getText();
     }
 
     /**
@@ -851,12 +985,16 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function clickOnObjectCheckBox()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('css', '.checkbox');
-        foreach ($element as $item) {
-            if ($item->isVisible()) {
-                $item->click();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.checkbox');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -866,12 +1004,16 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectInfoShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->find('css', '.info');
-        if ($element->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.info');
+            if ($element->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -938,13 +1080,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheButtonRegistersubmitShouldBeVisible()
     {
-        $page = $this->getSession()->getPage();
-        $element = $page->findAll('css', '.submit');
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="registration_form_submit"]');
 
-        if ($element[0]->isVisible()) {
-            echo 'VISIBLE';
-        } else {
-            echo 'NOT FOUND';
+
+            if ($element->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
 
@@ -980,14 +1127,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theNameOfObjectInfoShouldBeEqualToНеМаєшВласногоОбліковогоЗапису()
     {
-        $page = $this->getSession()->getPage();
-        $elements = $page->findAll('xpath', '/html/body/main/div/div/form/div[2]/span');
-        foreach ($elements as $element) {
-            if ($element->getText() == 'Не маєш власного облікового запису?') {
-                echo 'PASSED' . " " . $element->getText();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '/html/body/main/div/div/form/div[2]/span');
+            if ($element->getValue() == 'Не маєш власного облікового запису?') {
+                echo 'PASSED' . " " . $element->getValue();
             } else {
-                echo 'FALSE' . " " . $element->getText();
+                echo 'FALSE' . " " . $element->getValue();
             }
+        } catch (Error $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
+
 }
