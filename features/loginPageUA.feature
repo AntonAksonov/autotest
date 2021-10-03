@@ -1,4 +1,4 @@
-Feature: login form(UA)(not registered)
+Feature: login page(UA)(not registered)
 
   Background:
     Given the user navigates to {https://birzha.tech/}

@@ -1,15 +1,15 @@
-Feature: register form(UA)(not registered)
+Feature: register page(UA)(not registered)
 
   Background:
     Given the user navigates to {https://birzha.tech/}
     Then the button /register/ should be visible
+    And the user clicks on object /register/
+    And the current URL should be equal to {https://birzha.tech/register}
 
 
-  Scenario: Validate register Form
+  Scenario: validate register Form
 
-    When the user clicks on object /register/
-    Then the current URL should be equal to {https://birzha.tech/register}
-    And the object /register Page title/ should be visible
+    Then the object /register Page title/ should be visible
     And the name of the object /page title/ should be equal to /РЕЄСТРАЦІЯ/
 
     Then the object /registerInputLogin/ should be visible
@@ -29,6 +29,5 @@ Feature: register form(UA)(not registered)
 
     Then Then the button /registerSubmit/ should be visible
     And the name of object /registerSubmit/ should be equal to /Наступний крок/
-
     When the user clicks on object /registerSubmit/
     Then the current URL should be equal to {https://birzha.tech/register}
