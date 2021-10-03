@@ -1213,4 +1213,248 @@ class FeatureContext extends RawMinkContext implements Context
         }
     }
 
+
+    /**
+     * @Given the user navigates to {https:\/\/birzha.tech\/mylots}
+     */
+    public function theUserNavigatesToHttpsBirzhaTechMylots()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the button \/createProduct\/ should be visible
+     */
+    public function theButtonCreateproductShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.blue-button');
+
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the user clicks on object \/createProduct\/
+     */
+    public function theUserClicksOnObjectCreateproduct()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.blue-button');
+
+            if ($element->isVisible()) {
+                $element->click();
+            } else {
+                echo 'NOT FOUND';
+            }
+            $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the current URL should be equal to {https:\/\/birzha.tech\/profile\/create\/product}
+     */
+    public function theCurrentUrlShouldBeEqualToHttpsBirzhaTechProfileCreateProduct()
+    {
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/profile/create/product') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+            } else {
+                echo 'FALSE';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the object \/createProduct зage title\/ should be visible
+     */
+    public function theObjectCreateproductZageTitleShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the name of the object createProduct page title\/ should be equal to \/СТВОРИТИ АУКЦІОН\/
+     */
+    public function theNameOfTheObjectCreateproductPageTitleShouldBeEqualToStvoritiAuktsion()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the link \/myLots\/ should be visible
+     */
+    public function theLinkMylotsShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '/html/body/header/div/div/div[2]/a[2]');
+
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . $element->getValue();
+            } else {
+                echo 'NOT FOUND' . $element->getValue();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the user clicks on link \/myLots\/
+     */
+    public function theUserClicksOnLinkMylots()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '/html/body/header/div/div/div[2]/a[2]');
+
+            if ($element->isVisible()) {
+                $element->click();
+            } else {
+                echo 'NOT FOUND' . $element->getValue();
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the current URL should be equal to {https:\/\/birzha.tech\/mylots}
+     */
+    public function theCurrentUrlShouldBeEqualToHttpsBirzhaTechMylots()
+    {
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/mylots') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+            } else {
+                echo 'FALSE' . $this->getSession()->getCurrentUrl();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the object \/myLots Page title\/ should be visible
+     */
+    public function theObjectMylotsPageTitleShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', 'h1');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+
+    /**
+     * @Then the name of the object \/page title\/ should be equal to \/МОЇ ЗАЯВИ\/
+     */
+    public function theNameOfTheObjectPageTitleShouldBeEqualToMoyiZaiavi()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'h1');
+            if ($elements->getText() == 'МОЇ ЗАЯВИ') {
+                echo 'PASSED' . " " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+
+    }
+
+    /**
+     * @Then the name of button \/createProduct\/ should be equal to \/+ ДОДАТИ ОБ'ЄКТ\/
+     */
+    public function theNameOfButtonCreateproductShouldBeEqualToDodatiObekt()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the value of attribute href of button \/createProduct\/ should be equal to {\/profile\/create\/product}
+     */
+    public function theValueOfAttributeHrefOfButtonCreateproductShouldBeEqualToProfileCreateProduct()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.blue-button');
+            foreach ($elements as $element) {
+                if ($element->getAttribute('href') == '/profile/create/product') {
+                    echo 'PASSED';
+                } else {
+                    echo 'FALSE';
+                }
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the return code of URL from attribute href of object \/createProduct\/ should be equal to \/two hundred\/
+     */
+    public function theReturnCodeOfUrlFromAttributeHrefOfObjectCreateproductShouldBeEqualToTwoHundred()
+    {
+        try {
+
+            $page = $this->getSession()->getPage();
+            $url = $page->find('css', '.blue-button')->getAttribute('href');
+            $handle = curl_init($url);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+            $response = curl_exec($handle);
+            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            if ($httpCode == 200) {
+                echo 'STATUS CODE 200 | ' . PHP_EOL;
+            } else {
+                echo $httpCode;
+            }
+            curl_close($handle);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the name of button \/createProduct\/ should be equal to \/\+ ДОДАТИ ОБ'ЄКТ\/$/
+     */
+    public function theNameOfButtonCreateProductShouldBeEqualToДОДАТИОБЄКТ()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.blue-button');
+            foreach ($elements as $element) {
+                if ($element->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . $element->getText();
+                }
+            }
+        } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
 }
