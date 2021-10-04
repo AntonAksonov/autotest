@@ -1437,31 +1437,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
-//
-//    /**
-//     * @Given /^the name of button \/createProduct\/ should be equal to \/\+ ДОДАТИ ОБ\'ЄКТ\/$/
-//     */
-//    public function theNameOfButtonCreateProductShouldBeEqualToДОДАТИОБЄКТ()
-//    {
-//        try {
-//            try {
-//                $page = $this->getSession()->getPage();
-//            $elements = $page->findAll('css', '.blue-button');
-//                $elements = $page->findAll('xpath', '/html/body/main/div/div/h1/a');
-//                foreach ($elements as $element) {
-//                    if ($element[0]->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
-//                        echo 'PASSED' . " " . $element->getText();
-//                    } else {
-//                        echo 'FALSE' . $element->getText();
-//                    }
-//                }
-//            } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
-//               return ;
-//            }
-//        } catch (Exception | Error $e) {
-//            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-//        }
-//    }
+
     /**
      * @Given /^the name of button \/createProduct\/ should be equal to \/\+ ДОДАТИ ОБ\\'ЄКТ\/$/
      */
@@ -1481,5 +1457,613 @@ class FeatureContext extends RawMinkContext implements Context
             } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
                return ;
             }
+    }
+
+    /**
+     * @When the user nabigates to {https:\/\/birzha.tech\/profile\/create\/product}
+     */
+    public function theUserNabigatesToHttpsBirzhaTechProfileCreateProduct()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the object \/createProduct page title\/ should be visible
+     */
+    public function theObjectCreateproductPageTitleShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_title\/ should be visible
+     */
+    public function thenTheObjectAuctionsTitleShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_title\/ should be \/Назва заявки\/
+     */
+    public function theLabelForAuctionsTitleShouldBeNazvaZaiavki()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_name\/ should be visible
+     */
+    public function thenTheObjectAuctionsNameShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_name\/ should be \/Найменування товару\/
+     */
+    public function theLabelForAuctionsNameShouldBeNaimenuvanniaTovaru()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_content\/ should be visible
+     */
+    public function thenTheObjectAuctionsContentShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_content\/ should be \/Опис\/
+     */
+    public function theLabelForAuctionsContentShouldBeOpis()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_category\/ should be visible
+     */
+    public function thenTheObjectAuctionsCategoryShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_category\/ should be \/Категорія\/
+     */
+    public function theLabelForAuctionsCategoryShouldBeKategoriia()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_buySell\/ should be visible
+     */
+    public function thenTheObjectAuctionsBuysellShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_buySell\/ should be \/Купити \/ Продати\/
+     */
+    public function theLabelForAuctionsBuysellShouldBeKupitiProdati()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option one for the object \/auctions_buySell\/ should be \/Купити\/
+     */
+    public function theOptionOneForTheObjectAuctionsBuysellShouldBeKupiti()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option two for the object \/auctions_buySell\/ should be \/Продати\/
+     */
+    public function theOptionTwoForTheObjectAuctionsBuysellShouldBeProdati()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_type\/ should be visible
+     */
+    public function thenTheObjectAuctionsTypeShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_type\/ should be \/Тип\/
+     */
+    public function theLabelForAuctionsTypeShouldBeTip()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option one for the object \/auctions_buySell\/ should be \/Заявка\/
+     */
+    public function theOptionOneForTheObjectAuctionsBuysellShouldBeZaiavka()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option two for the object \/auctions_buySell\/ should be \/Котировка\/
+     */
+    public function theOptionTwoForTheObjectAuctionsBuysellShouldBeKotirovka()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_amount\/ should be visible
+     */
+    public function thenTheObjectAuctionsAmountShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_amount\/ should be \/Кількість\/
+     */
+    public function theLabelForAuctionsAmountShouldBeKilkist()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_price\/ should be visible
+     */
+    public function thenTheObjectAuctionsPriceShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_price\/ should be \/Ціна\/
+     */
+    public function theLabelForAuctionsPriceShouldBeTsina()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_cost\/ should be visible
+     */
+    public function thenTheObjectAuctionsCostShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_cost\/ should be \/Вартість\/
+     */
+    public function theLabelForAuctionsCostShouldBeVartist()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_quantity\/ should be visible
+     */
+    public function thenTheObjectAuctionsQuantityShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_quantity\/ should be \/Кількість заяв\/
+     */
+    public function theLabelForAuctionsQuantityShouldBeKilkistZaiav()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_deliveryBasis\/ should be visible
+     */
+    public function thenTheObjectAuctionsDeliverybasisShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_deliveryBasis\/ should be \/Базис поставки\/
+     */
+    public function theLabelForAuctionsDeliverybasisShouldBeBazisPostavki()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_deliveryWarehouse\/ should be visible
+     */
+    public function thenTheObjectAuctionsDeliverywarehouseShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_deliveryWarehouse\/ should be \/Склад поставки\/
+     */
+    public function theLabelForAuctionsDeliverywarehouseShouldBeSkladPostavki()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_unit\/ should be visible
+     */
+    public function thenTheObjectAuctionsUnitShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_unit\/ should be \/Од. вим.\/
+     */
+    public function theLabelForAuctionsUnitShouldBeOdVim()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_vat\/ should be visible
+     */
+    public function thenTheObjectAuctionsVatShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_vat\/ should be \/Ставка без ПДВ\/
+     */
+    public function theLabelForAuctionsVatShouldBeStavkaBezPdv()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option one for the object \/auctions_vat\/ should be \/Без НДС\/
+     */
+    public function theOptionOneForTheObjectAuctionsVatShouldBeBezNds()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option two for the object \/auctions_vat\/ should be \/:arg1 %\/
+     */
+    public function theOptionTwoForTheObjectAuctionsVatShouldBe($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option three for the object \/auctions_vat\/ should be \/:arg1 %\/
+     */
+    public function theOptionThreeForTheObjectAuctionsVatShouldBe($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option four for the object \/auctions_vat\/ should be \/:arg1 %\/
+     */
+    public function theOptionFourForTheObjectAuctionsVatShouldBe($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_accessType\/ should be visible
+     */
+    public function thenTheObjectAuctionsAccesstypeShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_accessType\/ should be \/Тип доступу\/
+     */
+    public function theLabelForAuctionsAccesstypeShouldBeTipDostupu()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option one for the object \/auctions_accessType\/ should be \/>=\/
+     */
+    public function theOptionOneForTheObjectAuctionsAccesstypeShouldBe()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option two for the object \/auctions_accessType\/ should be \/<=\/
+     */
+    public function theOptionTwoForTheObjectAuctionsAccesstypeShouldBe()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option three for the object \/auctions_accessType\/ should be \/=\/
+     */
+    public function theOptionThreeForTheObjectAuctionsAccesstypeShouldBe()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option four for the object \/auctions_accessType\/ should be \/<\/
+     */
+    public function theOptionFourForTheObjectAuctionsAccesstypeShouldBe()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option four for the object \/auctions_accessType\/ should be \/>\/
+     */
+    public function theOptionFourForTheObjectAuctionsAccesstypeShouldBe2()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_deal\/ should be visible
+     */
+    public function thenTheObjectAuctionsDealShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_deal\/ should be \/Здійснення угоди\/
+     */
+    public function theLabelForAuctionsDealShouldBeZdiisnenniaUgodi()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option one for the object \/auctions_deal\/ should be \/Атоматические\/
+     */
+    public function theOptionOneForTheObjectAuctionsDealShouldBeAtomaticheskie()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option two for the object \/auctions_deal\/ should be \/Уведомление\/
+     */
+    public function theOptionTwoForTheObjectAuctionsDealShouldBeUvedomlenie()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the checkBox \/auctions_auction\/ should be visible
+     */
+    public function theCheckboxAuctionsAuctionShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for checkBox \/auctions_auction\/ should be \/Це аукціон\/
+     */
+    public function theLabelForCheckboxAuctionsAuctionShouldBeTseAuktsion()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_startDate\/ should be visible
+     */
+    public function thenTheObjectAuctionsStartdateShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_startDate\/ should be \/Час початку (ч \/ м \/ с)\/
+     */
+    public function theLabelForAuctionsStartdateShouldBeChasPochatkuChMS()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_endDate\/ should be visible
+     */
+    public function thenTheObjectAuctionsEnddateShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_endDate\/ should be \/Тайм-аут закінчення (ч \/ м \/ с)\/
+     */
+    public function theLabelForAuctionsEnddateShouldBeTaimAutZakinchenniaChMS()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_spacing\/ should be visible
+     */
+    public function thenTheObjectAuctionsSpacingShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_spacing\/ should be \/Інтервал ставки (хвилини)\/
+     */
+    public function theLabelForAuctionsSpacingShouldBeIntervalStavkiKhvilini()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_guarantee\/ should be visible
+     */
+    public function thenTheObjectAuctionsGuaranteeShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_guarantee\/ should be \/Гарантійного внеску\/
+     */
+    public function theLabelForAuctionsGuaranteeShouldBeGarantiinogoVnesku()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_step\/ should be visible
+     */
+    public function thenTheObjectAuctionsStepShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_step\/ should be \/Крок торгів%\/
+     */
+    public function theLabelForAuctionsStepShouldBeKrokTorgiv()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_startPrice\/ should be visible
+     */
+    public function thenTheObjectAuctionsStartpriceShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_startPrice\/ should be \/Початкова ціна\/
+     */
+    public function theLabelForAuctionsStartpriceShouldBePochatkovaTsina()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the checkBox \/auctions_hideAuthor\/ should be visible
+     */
+    public function theCheckboxAuctionsHideauthorShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for checkBox \/auctions_hideAuthor\/ should be \/Приховувати автора\/
+     */
+    public function theLabelForCheckboxAuctionsHideauthorShouldBePrikhovuvatiAvtora()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_clients\/ should be visible
+     */
+    public function thenTheObjectAuctionsClientsShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_clients\/ should be \/Список клієнтів брокера (В розробці)\/
+     */
+    public function theLabelForAuctionsClientsShouldBeSpisokKliientivBrokeraVRozrobtsi()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then Then the object \/auctions_active\/ should be visible
+     */
+    public function thenTheObjectAuctionsActiveShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the label for \/auctions_active\/ should be \/Публікація\/
+     */
+    public function theLabelForAuctionsActiveShouldBePublikatsiia()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option one for the object \/auctions_deal\/ should be \/публікувати\/
+     */
+    public function theOptionOneForTheObjectAuctionsDealShouldBePublikuvati()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the option two for the object \/auctions_deal\/ should be \/Не опубліковано\/
+     */
+    public function theOptionTwoForTheObjectAuctionsDealShouldBeNeOpublikovano()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the button \/add-another-collection-widget\/ should be visible
+     */
+    public function theButtonAddAnotherCollectionWidgetShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the name of button \/add-another-collection-widget\/ should be equal to \/Додати зображення\/
+     */
+    public function theNameOfButtonAddAnotherCollectionWidgetShouldBeEqualToDodatiZobrazhennia()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the input \/auctions_thumbnailFile_file\/ should be visible
+     */
+    public function theInputAuctionsThumbnailfileFileShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the button \/auctions_submit\/ should be visible
+     */
+    public function theButtonAuctionsSubmitShouldBeVisible()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the name of button \/auctions_submit\/ should be equal to \/Відправити\/
+     */
+    public function theNameOfButtonAuctionsSubmitShouldBeEqualToVidpraviti()
+    {
+        throw new PendingException();
     }
 }
