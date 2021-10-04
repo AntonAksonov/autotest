@@ -1,7 +1,9 @@
-Feature: main page (UA) (not registered)
+Feature: main page (UA) (not registered) -------------------------------------------------------------------------------
 
   Background:
     Given the user navigates to {https://birzha.tech/}
+
+  Scenario:
 
     Then the object /logo/ should be visible
     And the value of attribute src of object /logo/ should be equal to {/images/logo.png}

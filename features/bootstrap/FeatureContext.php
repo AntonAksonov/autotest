@@ -1437,24 +1437,49 @@ class FeatureContext extends RawMinkContext implements Context
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
     }
-
+//
+//    /**
+//     * @Given /^the name of button \/createProduct\/ should be equal to \/\+ ДОДАТИ ОБ\'ЄКТ\/$/
+//     */
+//    public function theNameOfButtonCreateProductShouldBeEqualToДОДАТИОБЄКТ()
+//    {
+//        try {
+//            try {
+//                $page = $this->getSession()->getPage();
+//            $elements = $page->findAll('css', '.blue-button');
+//                $elements = $page->findAll('xpath', '/html/body/main/div/div/h1/a');
+//                foreach ($elements as $element) {
+//                    if ($element[0]->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
+//                        echo 'PASSED' . " " . $element->getText();
+//                    } else {
+//                        echo 'FALSE' . $element->getText();
+//                    }
+//                }
+//            } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
+//               return ;
+//            }
+//        } catch (Exception | Error $e) {
+//            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+//        }
+//    }
     /**
-     * @Given /^the name of button \/createProduct\/ should be equal to \/\+ ДОДАТИ ОБ'ЄКТ\/$/
+     * @Given /^the name of button \/createProduct\/ should be equal to \/\+ ДОДАТИ ОБ\\'ЄКТ\/$/
      */
     public function theNameOfButtonCreateProductShouldBeEqualToДОДАТИОБЄКТ()
     {
         try {
-            $page = $this->getSession()->getPage();
-            $elements = $page->findAll('css', '.blue-button');
-            foreach ($elements as $element) {
-                if ($element->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
-                    echo 'PASSED' . " " . $element->getText();
-                } else {
-                    echo 'FALSE' . $element->getText();
+                $page = $this->getSession()->getPage();
+            $elements = $page->find('css', '.blue-button');
+//                $elements = $page->findAll('xpath', '/html/body/main/div/div/h1/a');
+                foreach ($elements as $element) {
+                    if ($element->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
+                        echo 'PASSED' . " " . $element->getText();
+                    } else {
+                        echo 'FALSE' . $element->getText();
+                    }
                 }
+            } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
+               return ;
             }
-        } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
-            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-        }
     }
 }

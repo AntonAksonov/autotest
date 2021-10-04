@@ -1,4 +1,4 @@
-Feature: register page(UA)(not registered)
+Feature: register page(UA)(not registered) -----------------------------------------------------------------------------
 
   Background:
     Given the user navigates to {https://birzha.tech/}

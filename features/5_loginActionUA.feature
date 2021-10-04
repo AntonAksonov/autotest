@@ -1,4 +1,4 @@
-Feature: login action
+Feature: login action --------------------------------------------------------------------------------------------------
 
   Background:
     Given the user navigates to {https://birzha.tech/}

@@ -1,4 +1,6 @@
-Feature: create product page(UA) (logged in)
+Feature: create product page(UA) (logged in) ---------------------------------------------------------------------------
+
+  Scenario:
 #
 #
 #  Background:
