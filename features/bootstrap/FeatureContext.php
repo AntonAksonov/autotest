@@ -49,13 +49,11 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-
-//            $element = $page->find('css', '.logo');
             $element = $page->find('xpath', '/html/body/header/div/div/div[1]/img');
             if ($element->getAttribute('src') == '/images/logo.png') {
                 echo 'PASSED' . " " . $element->getAttribute('src');
             } else {
-                var_dump($element->getAttribute('src'));
+                echo 'NOT FOUND';
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -127,9 +125,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.phone');
+            $element = $page->find('css', '.phone');
 
-            if ($element[0]->isVisible()) {
+            if ($element->isVisible()) {
                 echo 'VISIBLE'  . " " . $element->getText();
             } else {
                 echo 'NOT FOUND'  . " " . $element->getText();
@@ -2234,21 +2232,152 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theReturnCodeOfURLFromAttributeHrefOfObjectLog_outShouldBeEqualToTwoHundred()
     {
+        try {
+        $page = $this->getSession()->getPage();
+        $element = $page->find('css', '.logout')->getAttribute('href');
+            $handle = curl_init($element);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+            $response = curl_exec($handle);
+            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            if ($httpCode == 200) {
+                echo 'STATUS CODE 200 | ' . PHP_EOL;
+            } else {
+                echo $httpCode;
+            }
+            curl_close($handle);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
 
+    /**
+     * @Then the object \/profile\/ should be visible
+     */
+    public function theObjectProfileShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.profile');
 
-//        try {
-//            $handle = curl_init('https://birzha.tech/login');
-//            curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
-//            $response = curl_exec($handle);
-//            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-//            if ($httpCode == 200) {
-//                echo 'STATUS CODE 200 | ' . PHP_EOL;
-//            } else {
-//                echo $httpCode;
-//            }
-//            curl_close($handle);
-//        } catch (Error | Exception $e) {
-//            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-//        }
+            if ($element[0]->isVisible()) {
+                echo 'VISIBLE';
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the value of attribute src of object \/profile\/ should be equal to {\/images\/icon_login.png}
+     */
+    public function theValueOfAttributeSrcOfObjectProfileShouldBeEqualToImagesIconLoginPng()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.profile');
+            if ($element->getAttribute('src') == '/images/icon_login.png') {
+                echo 'PASSED' . " " . $element->getAttribute('src');
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the value of attribute href of object \/profile\/ should be equal to {\/profile\/:arg1\/bro}
+     */
+    public function theValueOfAttributeHrefOfObjectProfileShouldBeEqualToProfileBro($arg1)
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.profile');
+            if ($element->getAttribute('href') == '/profile/26/bro') {
+                echo 'PASSED' . " " . $element->getAttribute('src');
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the return code of URL from attribute href of object \/profile\/ should be equal to \/two hundred\/
+     */
+    public function theReturnCodeOfUrlFromAttributeHrefOfObjectProfileShouldBeEqualToTwoHundred()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.profile')->getAttribute('href');
+            $handle = curl_init($element);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+            $response = curl_exec($handle);
+            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            if ($httpCode == 200) {
+                echo 'STATUS CODE 200 | ' . PHP_EOL;
+            } else {
+                echo $httpCode;
+            }
+            curl_close($handle);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @When the user clicks on object \/profile\/
+     */
+    public function theUserClicksOnObjectProfile()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.profile');
+            foreach ($elements as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the current URL should be equal to \/https:\/\/birzha.tech\/profile\/:arg1\/bro\/
+     */
+    public function theCurrentUrlShouldBeEqualToHttpsBirzhaTechProfileBro($arg1)
+    {
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/profile/26/bro') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+                $this->getSession()->back();
+            } else {
+                echo 'FALSE';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then the current URL should be equal to \/https:\/\/birzha.tech\/
+     */
+    public function theCurrentUrlShouldBeEqualToHttpsBirzhaTech2()
+    {
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+                $this->getSession()->back();
+            } else {
+                echo 'FALSE';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 }
