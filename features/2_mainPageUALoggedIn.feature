@@ -22,14 +22,8 @@ Feature: main page (UA) (logged in) --------------------------------------------
       And the object /currencies/ should be visible
       And the object /phone/ should be visible
 
-      Then the button /login/ should be visible
-      And the name of object /login/ should be equal to /вхід/
-      And the value of attribute href of object /login/ should be equal to {/login}
-      When the user clicks on object /login/
-      Then the return code of URL from attribute href of object /login/ should be equal to /two hundred/
-
-      Then the button /register/ should be visible
-      And the name of object /register/ should be equal to /Реєстрація/
-      And the value of attribute href of object /registration/ should be equal to {/register}
-      When the user clicks on object /register/
-      Then the return code of URL from attribute href of object /register/ should be equal to /two hundred/
+      Then the button /log_out/ should be visible
+      And the name of object /log_out/ should be equal to /вихід/
+      And the value of attribute href of object /log_out/ should be equal to {/logout}
+      When the user clicks on object /log_out/
+      Then the return code of URL from attribute href of object /log_out/ should be equal to /two hundred/

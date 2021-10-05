@@ -19,11 +19,15 @@ Feature: main page (UA) (logged out) -------------------------------------------
     Then the button /login/ should be visible
     And the name of object /login/ should be equal to /вхід/
     And the value of attribute href of object /login/ should be equal to {/login}
+    And the return code of URL from attribute href of object /login/ should be equal to /two hundred/
+
     When the user clicks on object /login/
-    Then the return code of URL from attribute href of object /login/ should be equal to /two hundred/
+    Then the current URL should be equal to {https://birzha.tech/login}
 
     Then the button /register/ should be visible
     And the name of object /register/ should be equal to /Реєстрація/
     And the value of attribute href of object /registration/ should be equal to {/register}
+    And the return code of URL from attribute href of object /register/ should be equal to /two hundred/
+
     When the user clicks on object /register/
-    Then the return code of URL from attribute href of object /register/ should be equal to /two hundred/
+    Then the current URL should be equal to {https://birzha.tech/register}

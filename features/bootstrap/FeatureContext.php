@@ -50,10 +50,10 @@ class FeatureContext extends RawMinkContext implements Context
         try {
             $page = $this->getSession()->getPage();
 
-            $element = $page->find('css', '.logo');
-
+//            $element = $page->find('css', '.logo');
+            $element = $page->find('xpath', '/html/body/header/div/div/div[1]/img');
             if ($element->getAttribute('src') == '/images/logo.png') {
-                echo 'PASSED';
+                echo 'PASSED' . " " . $element->getAttribute('src');
             } else {
                 var_dump($element->getAttribute('src'));
             }
@@ -130,9 +130,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->findAll('css', '.phone');
 
             if ($element[0]->isVisible()) {
-                echo 'VISIBLE';
+                echo 'VISIBLE'  . " " . $element->getText();
             } else {
-                echo 'NOT FOUND';
+                echo 'NOT FOUND'  . " " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -207,9 +207,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.registration');
+            $element = $page->find('css', '.registration');
 
-            if ($element[0]->isVisible()) {
+            if ($element->isVisible()) {
                 echo 'VISIBLE' . " " . $element->getText();
             } else {
                 echo 'NOT FOUND' . " " . $element->getText();
@@ -565,12 +565,10 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $elements = $page->findAll('css', '.btn-lg .btn-primary');
-            foreach ($elements as $item) {
-                if ($item->isVisible()) {
-                    $item->click();
+            $element = $page->findButton('Авторизуватися');
+                if ($element->isVisible()) {
+                    $element->click();
                 }
-            }
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -2151,5 +2149,106 @@ class FeatureContext extends RawMinkContext implements Context
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
+    }
+
+    /**
+     * @Then /^the button \/log_out\/ should be visible$/
+     */
+    public function theButtonLog_outShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.logout');
+
+            if ($element->isVisible()) {
+                echo 'VISIBLE'  . " " . $element->getText();
+            } else {
+                echo 'NOT FOUND'  . " " . $element->getText();
+            }
+        } catch (Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the name of object \/log_out\/ should be equal to \/вихід\/$/
+     */
+    public function theNameOfObjectLog_outShouldBeEqualToВихід()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.logout');
+            foreach ($elements as $element) {
+                if ($element->getText() == 'Вихід') {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . $element->getText();
+                }
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the value of attribute href of object \/log_out\/ should be equal to \{\/logout\}$/
+     */
+    public function theValueOfAttributeHrefOfObjectLog_outShouldBeEqualToLogout()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.logout');
+            foreach ($elements as $element) {
+                if ($element->getAttribute('href') == '/logout') {
+                    echo 'PASSED' . " " . $element->getAttribute('href');
+                } else {
+                    echo 'FALSE' . " " . $element->getAttribute('href');
+                }
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @When /^the user clicks on object \/log_out\/$/
+     */
+    public function theUserClicksOnObjectLog_out()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.logout');
+            foreach ($elements as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Then /^the return code of URL from attribute href of object \/log_out\/ should be equal to \/two hundred\/$/
+     */
+    public function theReturnCodeOfURLFromAttributeHrefOfObjectLog_outShouldBeEqualToTwoHundred()
+    {
+
+
+//        try {
+//            $handle = curl_init('https://birzha.tech/login');
+//            curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+//            $response = curl_exec($handle);
+//            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+//            if ($httpCode == 200) {
+//                echo 'STATUS CODE 200 | ' . PHP_EOL;
+//            } else {
+//                echo $httpCode;
+//            }
+//            curl_close($handle);
+//        } catch (Error | Exception $e) {
+//            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+//        }
     }
 }
