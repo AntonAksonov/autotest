@@ -89,7 +89,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.language');
+            $element = $page->findAll('css', '.menu-header .language');
 
             if ($element[0]->isVisible()) {
                 echo 'VISIBLE';
@@ -146,12 +146,12 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.login');
+            $element = $page->find('css', '.login');
 
-            if ($element[0]->isVisible()) {
-                echo 'VISIBLE';
+            if ($element->isVisible()) {
+                echo 'VISIBLE'  . " " . $element->getText();
             } else {
-                echo 'NOT FOUND';
+                echo 'NOT FOUND'  . " " . $element->getText();
             }
         } catch (Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -210,9 +210,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->findAll('css', '.registration');
 
             if ($element[0]->isVisible()) {
-                echo 'VISIBLE';
+                echo 'VISIBLE' . " " . $element->getText();
             } else {
-                echo 'NOT FOUND';
+                echo 'NOT FOUND' . " " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -248,9 +248,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.buttons .registration');
             foreach ($elements as $element) {
                 if ($element->getAttribute('href') == '/register') {
-                    echo 'PASSED';
+                    echo 'PASSED' . " " . $element->getAttribute('href');
                 } else {
-                    echo 'FALSE';
+                    echo 'FALSE' . " " . $element->getAttribute('href');
                 }
             }
         } catch (Error | Exception $e) {
@@ -281,45 +281,7 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
 
-    /**
-     * @And the value of attribute href of object \/login\/ should be equal to {\/login}
-     */
-    public function theValueOfAttributeHrefOfObjectLoginShouldBeEqualToLogin2()
-    {
-        try {
-            $page = $this->getSession()->getPage();
-            $elements = $page->findAll('css', '.login');
-            foreach ($elements as $element) {
-                if ($element->getAttribute('href') == '/login') {
-                    echo 'PASSED';
-                } else {
-                    echo 'FALSE';
-                }
-            }
-        } catch (Error | Exception $e) {
-            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-        }
-    }
 
-    /**
-     * @Then the value of attribute href of object \/login\/ should be equal to {\/login}
-     */
-    public function theValueOfAttributeHrefOfObjectLoginShouldBeEqualToLogin()
-    {
-        try {
-            $page = $this->getSession()->getPage();
-            $elements = $page->findAll('css', '.login');
-            foreach ($elements as $element) {
-                if ($element->getAttribute('href') == '/login') {
-                    echo 'PASSED';
-                } else {
-                    echo 'FALSE';
-                }
-            }
-        } catch (Error | Exception $e) {
-            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-        }
-    }
 
     /**
      * @Then the name of object \/login\/ should be equal to \/вхід\/
@@ -2071,5 +2033,123 @@ class FeatureContext extends RawMinkContext implements Context
         throw new PendingException();
     }
 
+    /**
+     * @Given /^the label of object \/menu\/ should be \/Заяви\/$/
+     */
+    public function theLabelOfObjectMenuShouldBeЗаяви()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.menu');
+            foreach ($elements as $element) {
+                if ($element->getText() == 'Заяви') {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . $element->getText();
+                }
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
 
+    /**
+     * @Given /^the value of attribute href of object \/menu\/ should be equal to \{\/\}$/
+     */
+    public function theValueOfAttributeHrefOfObjectMenuShouldBeEqualToRegister()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findLink('Заяви');
+//            foreach ($elements as $element) {
+                if ($elements->getAttribute('href') == '/') {
+                    echo 'PASSED'  . " " . $elements->getAttribute('href');
+                } else {
+                    echo 'FALSE';
+                }
+//            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the link \/Заяви\/ should be visible$/
+     */
+    public function theLinkЗаявиShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findLink('Заяви');
+
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " " . $element->getText();
+            } else {
+                echo 'NOT FOUND' . " " . $element->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the link \/Мої_заяви\/ should be visible$/
+     */
+    public function theLinkМої_заявиShouldBeVisible()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findLink('Мої заяви');
+
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " " . $element->getText();
+            } else {
+                echo 'NOT FOUND' . " " . $element->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the value of attribute href of object \/Мої_заяви\/ should be equal to \{\/\}$/
+     */
+    public function theValueOfAttributeHrefOfObjectМої_заявиShouldBeEqualTo()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findLink('Мої заяви');
+//            foreach ($elements as $element) {
+            if ($elements->getAttribute('href') == '/') {
+                echo 'PASSED'  . " " . $elements->getAttribute('href');
+            } else {
+                echo 'FALSE';
+            }
+//            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+
+
+    /**
+     * @Then the value of attribute href of object \/login\/ should be equal to {\/login}
+     */
+    public function theValueOfAttributeHrefOfObjectLoginShouldBeEqualToLogin()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->findAll('css', '.login');
+            foreach ($elements as $element) {
+                if ($element->getAttribute('href') == '/login') {
+                    echo 'PASSED' . " " . $element->getAttribute('href');
+                } else {
+                    echo 'FALSE' . " " . $element->getAttribute('href');
+                }
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
 }
