@@ -16,7 +16,7 @@ Feature: main page (UA) (logged in) --------------------------------------------
       And  the link /Заяви/ should be visible
       And the value of attribute href of object /menu/ should be equal to {/}
       And  the link /Мої_заяви/ should be visible
-      And the value of attribute href of object /Мої_заяви/ should be equal to {/}
+      And the value of attribute href of object /Мої_заяви/ should be equal to {/mylots}
 
       Then the object /language/ should be visible
       And the object /currencies/ should be visible

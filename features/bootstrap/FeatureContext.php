@@ -2112,7 +2112,7 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given /^the value of attribute href of object \/Мої_заяви\/ should be equal to \{\/\}$/
+     * @Given /^the value of attribute href of object \/Мої_заяви\/ should be equal to \{\/mylots\}$/
      */
     public function theValueOfAttributeHrefOfObjectМої_заявиShouldBeEqualTo()
     {
@@ -2120,7 +2120,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $elements = $page->findLink('Мої заяви');
 //            foreach ($elements as $element) {
-            if ($elements->getAttribute('href') == '/') {
+            if ($elements->getAttribute('href') == '/mylots') {
                 echo 'PASSED'  . " " . $elements->getAttribute('href');
             } else {
                 echo 'FALSE';
