@@ -1444,19 +1444,18 @@ class FeatureContext extends RawMinkContext implements Context
     public function theNameOfButtonCreateProductShouldBeEqualToДОДАТИОБЄКТ()
     {
         try {
-                $page = $this->getSession()->getPage();
+            $page = $this->getSession()->getPage();
             $elements = $page->find('css', '.blue-button');
 //                $elements = $page->findAll('xpath', '/html/body/main/div/div/h1/a');
-                foreach ($elements as $element) {
-                    if ($element->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
-                        echo 'PASSED' . " " . $element->getText();
-                    } else {
-                        echo 'FALSE' . $element->getText();
-                    }
+            foreach ($elements as $element) {
+                if ($element->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
+                    echo 'PASSED' . " " . $element->getText();
+                } else {
+                    echo 'FALSE' . $element->getText();
                 }
-            } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
-               return ;
             }
+        } catch (Error | Exception | \Behat\Behat\Definition\Exception\AmbiguousMatchException $e) {
+        }
     }
 
     /**
@@ -1875,13 +1874,6 @@ class FeatureContext extends RawMinkContext implements Context
         throw new PendingException();
     }
 
-    /**
-     * @Then the label for \/auctions_startDate\/ should be \/Час початку (ч \/ м \/ с)\/
-     */
-    public function theLabelForAuctionsStartdateShouldBeChasPochatkuChMS()
-    {
-        throw new PendingException();
-    }
 
     /**
      * @Then Then the object \/auctions_endDate\/ should be visible
@@ -1891,13 +1883,6 @@ class FeatureContext extends RawMinkContext implements Context
         throw new PendingException();
     }
 
-    /**
-     * @Then the label for \/auctions_endDate\/ should be \/Тайм-аут закінчення (ч \/ м \/ с)\/
-     */
-    public function theLabelForAuctionsEnddateShouldBeTaimAutZakinchenniaChMS()
-    {
-        throw new PendingException();
-    }
 
     /**
      * @Then Then the object \/auctions_spacing\/ should be visible
@@ -1907,13 +1892,6 @@ class FeatureContext extends RawMinkContext implements Context
         throw new PendingException();
     }
 
-    /**
-     * @Then the label for \/auctions_spacing\/ should be \/Інтервал ставки (хвилини)\/
-     */
-    public function theLabelForAuctionsSpacingShouldBeIntervalStavkiKhvilini()
-    {
-        throw new PendingException();
-    }
 
     /**
      * @Then Then the object \/auctions_guarantee\/ should be visible
@@ -1987,13 +1965,6 @@ class FeatureContext extends RawMinkContext implements Context
         throw new PendingException();
     }
 
-    /**
-     * @Then the label for \/auctions_clients\/ should be \/Список клієнтів брокера (В розробці)\/
-     */
-    public function theLabelForAuctionsClientsShouldBeSpisokKliientivBrokeraVRozrobtsi()
-    {
-        throw new PendingException();
-    }
 
     /**
      * @Then Then the object \/auctions_active\/ should be visible
@@ -2066,4 +2037,39 @@ class FeatureContext extends RawMinkContext implements Context
     {
         throw new PendingException();
     }
+
+
+    /**
+     * @Given /^the label for \/auctions_spacing\/ should be \/Інтервал ставки \(хвилини\)\/$/
+     */
+    public function theLabelForAuctions_spacingShouldBeІнтервалСтавкиХвилини()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^the label for \/auctions_endDate\/ should be \/Тайм\-аут закінчення \(ч \/ м \/ с\)\/$/
+     */
+    public function theLabelForAuctions_endDateShouldBeТаймАутЗакінченняЧМС()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^the label for \/auctions_clients\/ should be \/Список клієнтів брокера \(В розробці\)\/$/
+     */
+    public function theLabelForAuctions_clientsShouldBeСписокКлієнтівБрокераВРозробці()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Given /^the label for \/auctions_startDate\/ should be \/Час\\початку\\\(ч\\\/\\м\\\/\\с\)\/$/
+     */
+    public function theLabelForAuctions_startDateShouldBeЧасПочаткуЧМС()
+    {
+        throw new PendingException();
+    }
+
+
 }

@@ -86,7 +86,7 @@ Feature: create product page(UA) (logged in) -----------------------------------
     And the label for checkBox /auctions_auction/ should be /Це аукціон/
 
     Then Then the object /auctions_startDate/ should be visible
-    And the label for /auctions_startDate/ should be /Час початку (ч / м / с)/
+    And the label for /auctions_startDate/ should be /Час\початку\(ч\/\м\/\с)/
 
     Then Then the object /auctions_endDate/ should be visible
     And the label for /auctions_endDate/ should be /Тайм-аут закінчення (ч / м / с)/
@@ -105,9 +105,6 @@ Feature: create product page(UA) (logged in) -----------------------------------
 
     Then the checkBox /auctions_hideAuthor/ should be visible
     And the label for checkBox /auctions_hideAuthor/ should be /Приховувати автора/
-
-    Then Then the object /auctions_clients/ should be visible
-    And the label for /auctions_clients/ should be /Список клієнтів брокера (В розробці)/
 
     Then Then the object /auctions_clients/ should be visible
     And the label for /auctions_clients/ should be /Список клієнтів брокера (В розробці)/
