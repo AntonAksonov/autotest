@@ -7,10 +7,11 @@ Feature: main page (UA) (logged out) -------------------------------------------
 
     Then the object /logo/ should be visible
     And the value of attribute src of object /logo/ should be equal to {/images/logo.png}
+    And the value of attribute alt of object /logo/ should be equal to {/images/logo.png}
 
     Then the object /menu/ should be visible
     And  the link /Заяви/ should be visible
-    And the value of attribute href of object /menu/ should be equal to {/}
+    And the value of attribute href of object /Заяви/ should be equal to {/}
 
     Then the object /language/ should be visible
     And the object /currencies/ should be visible

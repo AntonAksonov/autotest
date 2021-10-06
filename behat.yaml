@@ -6,5 +6,30 @@ default:
       sessions:
         default:
           selenium2:
-            wd_host: "http://127.0.0.1:4444/wd/hub"
+#            wd_host: "http://127.0.0.1:4444/wd/hub"
+
+
+
+
+
+
+
+
+#    Bex\Behat\ScreenshotExtension: ~
+#      enabled: true
+#      screenshot_taking_mode: all_scenarios
+#      image_drivers:
+#        local:
+#          screenshot_directory: /Users/macbookmac/PhpstormProjects/birzhaTech/screenshots
+#          clear_screenshot_directory: true  # Enable removing all images before each test run. It is false by default.
+
+
+
+
+        # Available modes:
+        #  - failed_steps: Image contains only the screenshot of the failed step. [Default]
+        #  - failed_scenarios: Image contains screenshots of all steps in a failed scenario.
+      #  - all_scenarios: Each scenario has a combined image created, regardless of failing or passing.
+
+
 

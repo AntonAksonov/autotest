@@ -5,7 +5,7 @@ Feature: register action -------------------------------------------------------
     Then the button /register/ should be visible
 
 
-  Scenario: validate login form
+  Scenario: register
 
     When the user clicks on object /register/
     Then the current URL should be equal to {https://birzha.tech/register}

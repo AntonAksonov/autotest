@@ -14,10 +14,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theUserNavigatesToHttpsBirzhaTech()
     {
+//        $driver = new \Behat\Mink\Driver\Selenium2Driver('firefox');
         try {
             $session = $this->getSession();
             $session->visit($this->locatePath('/'));
             echo $this->getSession()->getCurrentUrl();
+            $this->getSession()->getScreenshot();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
@@ -30,9 +32,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.container .logo');
+            $element = $page->find('css', '.logo');
 
-            if ($element[0]->isVisible()) {
+            if ($element->isVisible()) {
                 echo 'VISIBLE';
             } else {
                 echo 'NOT FOUND';
@@ -49,11 +51,11 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('xpath', '/html/body/header/div/div/div[1]/img');
+            $element = $page->find('css', '.logo img');
             if ($element->getAttribute('src') == '/images/logo.png') {
-                echo 'PASSED' . " " . $element->getAttribute('src');
+                echo 'PASSED' . " | " . $element->getAttribute('src');
             } else {
-                echo 'NOT FOUND';
+                echo 'NOT FOUND' . " | " . $element->getAttribute('src');
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -87,10 +89,11 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.menu-header .language');
+//            $element = $page->findAll('css', 'language');
+            $element = $page->find('xpath', '//*[@id="language"]');
 
-            if ($element[0]->isVisible()) {
-                echo 'VISIBLE';
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getAttribute('name');
             } else {
                 echo 'NOT FOUND';
             }
@@ -106,10 +109,11 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('css', '.currencies');
+//            $element = $page->findAll('css', '.currencies');
+            $element = $page->find('xpath', '//*[@id="currencies"]');
 
-            if ($element[0]->isVisible()) {
-                echo 'VISIBLE';
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getAttribute('name');
             } else {
                 echo 'NOT FOUND';
             }
@@ -125,12 +129,11 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css', '.phone');
-
+            $element = $page->find('css', '.phone img');
             if ($element->isVisible()) {
-                echo 'VISIBLE'  . " " . $element->getText();
+                echo 'VISIBLE'  . " | " . $element->getAttribute('alt');
             } else {
-                echo 'NOT FOUND'  . " " . $element->getText();
+                echo 'NOT FOUND'  . " | " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -147,9 +150,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->find('css', '.login');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE'  . " " . $element->getText();
+                echo 'VISIBLE'  . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND'  . " " . $element->getText();
+                echo 'NOT FOUND'  . " | " . $element->getText();
             }
         } catch (Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -208,9 +211,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->find('css', '.registration');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND' . " " . $element->getText();
+                echo 'NOT FOUND' . " | " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -246,9 +249,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.buttons .registration');
             foreach ($elements as $element) {
                 if ($element->getAttribute('href') == '/register') {
-                    echo 'PASSED' . " " . $element->getAttribute('href');
+                    echo 'PASSED' . " | " . $element->getAttribute('href');
                 } else {
-                    echo 'FALSE' . " " . $element->getAttribute('href');
+                    echo 'FALSE' . " | " . $element->getAttribute('href');
                 }
             }
         } catch (Error | Exception $e) {
@@ -291,7 +294,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.login');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Вхід') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -311,9 +314,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.registration');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Реєстрація') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
-                    echo 'FALSE' . " " . $element->getText();
+                    echo 'FALSE' . " | " . $element->getText();
                 }
             }
         } catch (Error | Exception $e) {
@@ -365,7 +368,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.h3');
             foreach ($elements as $element) {
                 if ($element->getText() == 'АВТОРИЗАЦІЯ') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -404,7 +407,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('xpath', '/html/body/main/div/div/form/label[1]');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Логін') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -451,7 +454,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('xpath', '//*[@id="registration_form_plainPassword"]');
             foreach ($elements as $element) {
                 if ($element->getValue() == 'Пароль') {
-                    echo 'PASSED' . " " . $element->getValue();
+                    echo 'PASSED' . " | " . $element->getValue();
                 } else {
                     echo 'FALSE' . $element->getValue();
                 }
@@ -470,9 +473,9 @@ class FeatureContext extends RawMinkContext implements Context
         $elements = $page->findAll('css', '.inputPassword');
         foreach ($elements as $element) {
             if ($element->getText() == NULL) {
-                echo 'PASSED' . " " . $element->getText();
+                echo 'PASSED' . " | " . $element->getText();
             } else {
-                echo 'FALSE' . " " . $element->getText();
+                echo 'FALSE' . " | " . $element->getText();
             }
         }
     }
@@ -506,9 +509,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.checkbbox');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Запам`ятати мене') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
-                    echo 'FALSE' . " " . $element->getText();
+                    echo 'FALSE' . " | " . $element->getText();
 
                 }
             }
@@ -546,9 +549,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.btn-primary');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Авторизуватися') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
-                    echo 'FALSE' . " " . $element->getText();
+                    echo 'FALSE' . " | " . $element->getText();
                 }
             }
         } catch (Error | Exception $e) {
@@ -584,9 +587,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('xpath', '//*[@id="registration_form_login"]');
             foreach ($elements as $element) {
                 if ($element[0]->getValue() == '+38(000)00-00-00-0') {
-                    echo 'PASSED' . " " . $element->getValue();
+                    echo 'PASSED' . " | " . $element->getValue();
                 } else {
-                    echo 'FALSE' . " " . $element->getValue();
+                    echo 'FALSE' . " | " . $element->getValue();
                 }
             }
         } catch (Error | Exception $e) {
@@ -633,7 +636,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $elements = $page->find('css', 'h1');
             if ($elements->getText() == 'РЕЄСТРАЦІЯ') {
-                echo 'PASSED' . " " . $elements->getText();
+                echo 'PASSED' . " | " . $elements->getText();
             } else {
                 echo 'FALSE' . $elements->getText();
             }
@@ -671,7 +674,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->find('xpath', '//*[@id="registration_form"]/div[2]/label');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Email') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                     var_dump($element);
                 } else {
                     echo 'FALSE' . $element->getText();
@@ -711,9 +714,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->find('xpath', '//*[@id="registration_form"]/div[4]/label');
             foreach ($elements as $element) {
                 if ($element->getValue() == 'Я підтверджую свою згоду') {
-                    echo 'PASSED' . " " . $element->getValue();
+                    echo 'PASSED' . " | " . $element->getValue();
                 } else {
-                    echo 'FALSE' . " " . $element->getValue();
+                    echo 'FALSE' . " | " . $element->getValue();
                 }
             }
         } catch (Error | Exception $e) {
@@ -749,7 +752,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('css', 'h1');
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
                 echo 'NOT FOUND';
             }
@@ -767,7 +770,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('xpath', '//*[@id="registration_form_login"]');
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
                 echo 'NOT FOUND';
             }
@@ -786,7 +789,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->find('xpath', '//*[@id="registration_form"]/div[1]/label');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Логін') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                     var_dump($element);
                 } else {
                     echo 'FALSE' . $element->getText();
@@ -807,9 +810,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.registration_form_login');
             foreach ($elements as $element) {
                 if ($element[0]->getText() == '+38(000)00-00-00-0') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
-                    echo 'FALSE' . " " . $element->getText();
+                    echo 'FALSE' . " | " . $element->getText();
                 }
             }
         } catch (Error | Exception $e) {
@@ -845,7 +848,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('xpath', '//*[@id="registration_form"]/div[3]/label');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Пароль') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -865,9 +868,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->find('xpath', '//*[@id="registration_form_plainPassword"]');
             foreach ($elements as $element) {
                 if ($element->getText() == NULL) {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
-                    echo 'FALSE' . " " . $element->getText();
+                    echo 'FALSE' . " | " . $element->getText();
                 }
             }
         } catch (Error | Exception $e) {
@@ -887,7 +890,7 @@ class FeatureContext extends RawMinkContext implements Context
                 if ($element->getText() == NULL) {
                     echo 'PASSED';
                 } else {
-                    echo 'FALSE' . " " . $element->getText();
+                    echo 'FALSE' . " | " . $element->getText();
                 }
             }
         } catch (Error | Exception $e) {
@@ -1055,7 +1058,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('css', 'form div a');
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
                 echo 'NOT FOUND';
             }
@@ -1072,9 +1075,9 @@ class FeatureContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
         $element = $page->find('css', 'form div a');
         if ($element->getAttribute('href') == '/register') {
-            echo 'PASSED' . " " . $element->getAttribute('href');
+            echo 'PASSED' . " | " . $element->getAttribute('href');
         } else {
-            echo 'FALSE' . " " . $element->getAttribute('href');
+            echo 'FALSE' . " | " . $element->getAttribute('href');
         }
     }
 
@@ -1086,9 +1089,9 @@ class FeatureContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
         $element = $page->find('css', 'form div a');
         if ($element->getText() === 'Увійдіть') {
-            echo 'PASSED' . " " . $element->getText();
+            echo 'PASSED' . " | " . $element->getText();
         } else {
-            echo 'FALSE' . " " . $element->getText();
+            echo 'FALSE' . " | " . $element->getText();
 
         }
     }
@@ -1135,9 +1138,9 @@ class FeatureContext extends RawMinkContext implements Context
         $elements = $page->findAll('css', '.submit');
         foreach ($elements as $element) {
             if ($element->getText() == 'Наступний крок') {
-                echo 'PASSED' . " " . $element->getText();
+                echo 'PASSED' . " | " . $element->getText();
             } else {
-                echo 'FALSE' . " " . $element->getText();
+                echo 'FALSE' . " | " . $element->getText();
             }
         }
     }
@@ -1162,9 +1165,9 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('xpath', '/html/body/main/div/div/form/div[2]/span');
             if ($element->getValue() == 'Не маєш власного облікового запису?') {
-                echo 'PASSED' . " " . $element->getValue();
+                echo 'PASSED' . " | " . $element->getValue();
             } else {
-                echo 'FALSE' . " " . $element->getValue();
+                echo 'FALSE' . " | " . $element->getValue();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -1248,7 +1251,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theNameOfTheObjectCreateproductPageTitleShouldBeEqualToStvoritiAuktsion()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'h1');
+            if ($elements->getText() == 'СТВОРИТИ АУКЦІОН') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1315,7 +1328,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('css', 'h1');
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
                 echo 'NOT FOUND';
             }
@@ -1334,7 +1347,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $elements = $page->find('css', 'h1');
             if ($elements->getText() == 'МОЇ ЗАЯВИ') {
-                echo 'PASSED' . " " . $elements->getText();
+                echo 'PASSED' . " | " . $elements->getText();
             } else {
                 echo 'FALSE' . $elements->getText();
             }
@@ -1407,7 +1420,7 @@ class FeatureContext extends RawMinkContext implements Context
 //                $elements = $page->findAll('xpath', '/html/body/main/div/div/h1/a');
             foreach ($elements as $element) {
                 if ($element->getText() == '+ ДОДАТИ ОБ\'ЄКТ') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -1417,11 +1430,17 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
     /**
-     * @When the user nabigates to {https:\/\/birzha.tech\/profile\/create\/product}
+     * @When the user navigates to {https:\/\/birzha.tech\/profile\/create\/product}
      */
     public function theUserNabigatesToHttpsBirzhaTechProfileCreateProduct()
     {
-        throw new PendingException();
+        try {
+            $session = $this->getSession();
+            $session->visit($this->locatePath('https://birzha.tech/profile/create/product'));
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1429,7 +1448,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theObjectCreateproductPageTitleShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', 'h1');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1437,7 +1466,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsTitleShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', 'auctions_title');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1445,7 +1484,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsTitleShouldBeNazvaZaiavki()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_title');
+            if ($elements->getText() == 'Назва заявки') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1453,7 +1502,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsNameShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_name');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1461,7 +1520,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsNameShouldBeNaimenuvanniaTovaru()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_name');
+            if ($elements->getText() == 'Найменування товару') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1469,7 +1538,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsContentShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_content');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1477,7 +1556,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsContentShouldBeOpis()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_content');
+            if ($elements->getText() == 'Опис') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        };
     }
 
     /**
@@ -1485,7 +1574,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsCategoryShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_category');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1493,7 +1592,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsCategoryShouldBeKategoriia()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_category');
+            if ($elements->getText() == 'Категорія') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1501,7 +1610,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsBuysellShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_buySell');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1509,7 +1628,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsBuysellShouldBeKupitiProdati()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_buySell');
+            if ($elements->getText() == 'Продати') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1533,7 +1662,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsTypeShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_type');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1541,7 +1680,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsTypeShouldBeTip()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_type');
+            if ($elements->getText() == 'Тип') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1565,7 +1714,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsAmountShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_amount');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1573,7 +1732,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsAmountShouldBeKilkist()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_amount');
+            if ($elements->getText() == 'Кількість') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1581,7 +1750,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsPriceShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_price');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1589,7 +1768,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsPriceShouldBeTsina()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_price');
+            if ($elements->getText() == 'Ціна') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1597,7 +1786,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsCostShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_cost');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1605,7 +1804,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsCostShouldBeVartist()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_cost');
+            if ($elements->getText() == 'Вартість') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1613,7 +1822,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsQuantityShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_quantity');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1621,7 +1840,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsQuantityShouldBeKilkistZaiav()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_quantity');
+            if ($elements->getText() == 'Кількість заяв') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1629,7 +1858,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsDeliverybasisShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_deliveryBasis');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1637,7 +1876,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsDeliverybasisShouldBeBazisPostavki()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_deliveryBasis');
+            if ($elements->getText() == 'Базис поставки') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1645,7 +1894,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsDeliverywarehouseShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_deliveryWarehouse');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1653,7 +1912,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsDeliverywarehouseShouldBeSkladPostavki()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_deliveryWarehouse');
+            if ($elements->getText() == 'Склад поставки') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1661,7 +1930,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsUnitShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_unit');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1669,7 +1948,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsUnitShouldBeOdVim()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_unit');
+            if ($elements->getText() == 'Од. вим.') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1677,7 +1966,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsVatShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_vat');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1685,7 +1984,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsVatShouldBeStavkaBezPdv()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_vat');
+            if ($elements->getText() == 'Ставка без ПДВ') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1725,7 +2034,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsAccesstypeShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_accessType');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1733,7 +2052,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsAccesstypeShouldBeTipDostupu()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_accessType');
+            if ($elements->getText() == 'Тип доступу') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1781,7 +2110,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsDealShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_deal');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1789,7 +2128,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsDealShouldBeZdiisnenniaUgodi()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_deal');
+            if ($elements->getText() == 'Здійснення угоди') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1813,7 +2162,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theCheckboxAuctionsAuctionShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_auction');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1821,7 +2180,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForCheckboxAuctionsAuctionShouldBeTseAuktsion()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_auction');
+            if ($elements->getText() == 'Це аукціон') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1829,7 +2198,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsStartdateShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_startDate');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
 
@@ -1838,7 +2217,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsEnddateShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_endDate');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
 
@@ -1847,7 +2236,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsSpacingShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_spacing');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
 
@@ -1856,7 +2255,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsGuaranteeShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_guarantee');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1864,7 +2273,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsGuaranteeShouldBeGarantiinogoVnesku()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_guarantee');
+            if ($elements->getText() == 'Гарантійного внеску') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1872,7 +2291,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsStepShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_step');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1880,7 +2309,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsStepShouldBeKrokTorgiv()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_step');
+            if ($elements->getText() == 'Крок торгів%') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1888,7 +2327,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsStartpriceShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_startPrice');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1896,7 +2345,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsStartpriceShouldBePochatkovaTsina()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_startPrice');
+            if ($elements->getText() == 'Початкова ціна') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1904,7 +2363,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theCheckboxAuctionsHideauthorShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_hideAuthor');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1912,7 +2381,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForCheckboxAuctionsHideauthorShouldBePrikhovuvatiAvtora()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_hideAuthor');
+            if ($elements->getText() == 'Приховувати автора') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1920,7 +2399,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsClientsShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_clients');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
 
@@ -1929,7 +2418,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function thenTheObjectAuctionsActiveShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_active');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1937,7 +2436,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctionsActiveShouldBePublikatsiia()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_active');
+            if ($elements->getText() == 'Публікація') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1961,7 +2470,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theButtonAddAnotherCollectionWidgetShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.add-another-collection-widget');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1969,7 +2488,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theNameOfButtonAddAnotherCollectionWidgetShouldBeEqualToDodatiZobrazhennia()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'add-another-collection-widget');
+            if ($elements->getText() == 'Додати зображення') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1977,7 +2506,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theInputAuctionsThumbnailfileFileShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_thumbnailFile_file');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1985,7 +2524,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theButtonAuctionsSubmitShouldBeVisible()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.auctions_submit');
+            if ($element->isVisible()) {
+                echo 'VISIBLE' . " | " . $element->getText();
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -1993,7 +2542,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theNameOfButtonAuctionsSubmitShouldBeEqualToVidpraviti()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', 'auctions_submit');
+            if ($elements->getText() == 'Відправити') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
 
@@ -2002,7 +2561,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctions_spacingShouldBeІнтервалСтавкиХвилини()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', '');
+            if ($elements->getText() == '') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -2010,7 +2579,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctions_endDateShouldBeТаймАутЗакінченняЧМС()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', '');
+            if ($elements->getText() == '') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -2018,7 +2597,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctions_clientsShouldBeСписокКлієнтівБрокераВРозробці()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', '');
+            if ($elements->getText() == '') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -2026,7 +2615,17 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function theLabelForAuctions_startDateShouldBeЧасПочаткуЧМС()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $elements = $page->find('css', '');
+            if ($elements->getText() == '') {
+                echo 'PASSED' . " | " . $elements->getText();
+            } else {
+                echo 'FALSE' . $elements->getText();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
     }
 
     /**
@@ -2039,7 +2638,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.menu');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Заяви') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -2050,20 +2649,18 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Given /^the value of attribute href of object \/menu\/ should be equal to \{\/\}$/
+     * @Given /^the value of attribute href of object \/Заяви\/ should be equal to \{\/\}$/
      */
     public function theValueOfAttributeHrefOfObjectMenuShouldBeEqualToRegister()
     {
         try {
             $page = $this->getSession()->getPage();
             $elements = $page->findLink('Заяви');
-//            foreach ($elements as $element) {
                 if ($elements->getAttribute('href') == '/') {
-                    echo 'PASSED'  . " " . $elements->getAttribute('href');
+                    echo 'PASSED'  . " | " . $elements->getAttribute('href');
                 } else {
                     echo 'FALSE';
                 }
-//            }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
         }
@@ -2079,9 +2676,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->findLink('Заяви');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND' . " " . $element->getText();
+                echo 'NOT FOUND' . " | " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -2098,9 +2695,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->findLink('Мої заяви');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE' . " " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND' . " " . $element->getText();
+                echo 'NOT FOUND' . " | " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -2117,7 +2714,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findLink('Мої заяви');
 //            foreach ($elements as $element) {
             if ($elements->getAttribute('href') == '/mylots') {
-                echo 'PASSED'  . " " . $elements->getAttribute('href');
+                echo 'PASSED'  . " | " . $elements->getAttribute('href');
             } else {
                 echo 'FALSE';
             }
@@ -2139,9 +2736,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.login');
             foreach ($elements as $element) {
                 if ($element->getAttribute('href') == '/login') {
-                    echo 'PASSED' . " " . $element->getAttribute('href');
+                    echo 'PASSED' . " | " . $element->getAttribute('href');
                 } else {
-                    echo 'FALSE' . " " . $element->getAttribute('href');
+                    echo 'FALSE' . " | " . $element->getAttribute('href');
                 }
             }
         } catch (Error | Exception $e) {
@@ -2159,9 +2756,9 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->find('css', '.logout');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE'  . " " . $element->getText();
+                echo 'VISIBLE'  . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND'  . " " . $element->getText();
+                echo 'NOT FOUND'  . " | " . $element->getText();
             }
         } catch (Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -2178,7 +2775,7 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.logout');
             foreach ($elements as $element) {
                 if ($element->getText() == 'Вихід') {
-                    echo 'PASSED' . " " . $element->getText();
+                    echo 'PASSED' . " | " . $element->getText();
                 } else {
                     echo 'FALSE' . $element->getText();
                 }
@@ -2198,9 +2795,9 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findAll('css', '.logout');
             foreach ($elements as $element) {
                 if ($element->getAttribute('href') == '/logout') {
-                    echo 'PASSED' . " " . $element->getAttribute('href');
+                    echo 'PASSED' . " | " . $element->getAttribute('href');
                 } else {
-                    echo 'FALSE' . " " . $element->getAttribute('href');
+                    echo 'FALSE' . " | " . $element->getAttribute('href');
                 }
             }
         } catch (Error | Exception $e) {
@@ -2235,7 +2832,7 @@ class FeatureContext extends RawMinkContext implements Context
         try {
         $page = $this->getSession()->getPage();
         $element = $page->find('css', '.logout')->getAttribute('href');
-            $handle = curl_init($element);
+            $handle = curl_init('https://birzha.tech'. $element);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
@@ -2276,9 +2873,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css', '.profile');
+            $element = $page->find('css', '.profile img');
             if ($element->getAttribute('src') == '/images/icon_login.png') {
-                echo 'PASSED' . " " . $element->getAttribute('src');
+                echo 'PASSED' . " | " . $element->getAttribute('src');
             } else {
                 echo 'NOT FOUND';
             }
@@ -2296,7 +2893,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('css', '.profile');
             if ($element->getAttribute('href') == '/profile/26/bro') {
-                echo 'PASSED' . " " . $element->getAttribute('src');
+                echo 'PASSED' . " | " . $element->getAttribute('href');
             } else {
                 echo 'NOT FOUND';
             }
@@ -2313,7 +2910,7 @@ class FeatureContext extends RawMinkContext implements Context
         try {
             $page = $this->getSession()->getPage();
             $element = $page->find('css', '.profile')->getAttribute('href');
-            $handle = curl_init($element);
+            $handle = curl_init('https://birzha.tech'. $element);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
@@ -2370,11 +2967,29 @@ class FeatureContext extends RawMinkContext implements Context
     public function theCurrentUrlShouldBeEqualToHttpsBirzhaTech2()
     {
         try {
-            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech') {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/') {
                 echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
                 $this->getSession()->back();
             } else {
-                echo 'FALSE';
+                echo 'FALSE' . " " . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+        }
+    }
+
+    /**
+     * @Given /^the value of attribute alt of object \/logo\/ should be equal to \{\/images\/logo\.png\}$/
+     */
+    public function theValueOfAttributeAltOfObjectLogoShouldBeEqualToImagesLogoPng()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.logo img');
+            if ($element->getAttribute('alt') == 'BIRZHA.TECH') {
+                echo 'PASSED' . " | " . $element->getAttribute('alt');
+            } else {
+                echo 'NOT FOUND' . " | " . $element->getAttribute('alt');
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();

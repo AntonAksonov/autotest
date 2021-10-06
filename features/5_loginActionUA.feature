@@ -5,7 +5,7 @@ Feature: login action ----------------------------------------------------------
     Then the button /login/ should be visible
 
 
-  Scenario: Validate Login Form
+  Scenario: Login
 
     When the user clicks on object /login/
     Then the current URL should be equal to {https://birzha.tech/login}
