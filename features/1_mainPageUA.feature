@@ -2,6 +2,7 @@ Feature: main page (UA) (logged out) -------------------------------------------
 
   Background:
     Given the user navigates to {https://birzha.tech/}
+#    And take screenshot
 
   Scenario:
 

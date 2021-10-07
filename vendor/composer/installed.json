@@ -1,6 +1,59 @@
 {
     "packages": [
         {
+            "name": "applitools/eyes.sdk.php",
+            "version": "v1.3.3",
+            "version_normalized": "1.3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/applitools/eyes.sdk.php.git",
+                "reference": "7142a229c4ce641ef16f45405eec72ceb0ba29a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/applitools/eyes.sdk.php/zipball/7142a229c4ce641ef16f45405eec72ceb0ba29a3",
+                "reference": "7142a229c4ce641ef16f45405eec72ceb0ba29a3",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/webdriver": ">=1.7.1",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=8.4.3"
+            },
+            "suggest": {
+                "phpunit/phpunit": "To run your tests"
+            },
+            "time": "2019-12-26T08:05:14+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "eyes.sdk.php",
+                    "eyes.common.php",
+                    "eyes.images.php",
+                    "eyes.selenium.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "A php sdk for Applitools",
+            "homepage": "https://github.com/applitools/eyes.sdk.php",
+            "keywords": [
+                "applitools",
+                "php",
+                "webdriver"
+            ],
+            "support": {
+                "issues": "https://github.com/applitools/eyes.sdk.php/issues",
+                "source": "https://github.com/applitools/eyes.sdk.php"
+            },
+            "install-path": "../applitools/eyes.sdk.php"
+        },
+        {
             "name": "behat/behat",
             "version": "v3.8.1",
             "version_normalized": "3.8.1.0",
