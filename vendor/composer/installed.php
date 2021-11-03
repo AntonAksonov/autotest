@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '1d2678fe3125079413b2457f22bbef1bf722a372',
+        'reference' => 'a01e59cae6ff3690523a6207288848210f76f1c5',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '1d2678fe3125079413b2457f22bbef1bf722a372',
+            'reference' => 'a01e59cae6ff3690523a6207288848210f76f1c5',
             'dev_requirement' => false,
         ),
         'applitools/eyes.sdk.php' => array(
@@ -237,6 +237,18 @@
             'reference' => 'bae7c545bef187884426f042434e561ab1ddb182',
             'dev_requirement' => true,
         ),
+        'php-http/async-client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
+        'php-http/client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '*',
+            ),
+        ),
         'php-webdriver/webdriver' => array(
             'pretty_version' => '1.11.1',
             'version' => '1.11.1.0',
@@ -343,7 +355,7 @@
             'install_path' => __DIR__ . '/../psr/container',
             'aliases' => array(),
             'reference' => '8622567409010282b7aeebe4bb841fe98b58dcaf',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'psr/container-implementation' => array(
             'dev_requirement' => true,
@@ -362,6 +374,12 @@
         ),
         'psr/event-dispatcher-implementation' => array(
             'dev_requirement' => true,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
+        'psr/http-client-implementation' => array(
+            'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0',
             ),
@@ -388,7 +406,7 @@
             'install_path' => __DIR__ . '/../psr/log',
             'aliases' => array(),
             'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'psr/log-implementation' => array(
             'dev_requirement' => true,
@@ -601,7 +619,7 @@
             'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(),
             'reference' => '5f38c8804a9e97d23e0c8d63341088cd8a22d627',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/dom-crawler' => array(
             'pretty_version' => 'v4.4.30',
@@ -653,6 +671,30 @@
             'aliases' => array(),
             'reference' => 'a10000ada1e600d109a6c7632e9ac42e8bf2fb93',
             'dev_requirement' => true,
+        ),
+        'symfony/http-client' => array(
+            'pretty_version' => 'v5.3.10',
+            'version' => '5.3.10.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/http-client',
+            'aliases' => array(),
+            'reference' => '710b69ed4bc9469900ec5ae5c3807b0509bee0dc',
+            'dev_requirement' => false,
+        ),
+        'symfony/http-client-contracts' => array(
+            'pretty_version' => 'v2.4.0',
+            'version' => '2.4.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/http-client-contracts',
+            'aliases' => array(),
+            'reference' => '7e82f6084d7cae521a75ef2cb5c9457bbda785f4',
+            'dev_requirement' => false,
+        ),
+        'symfony/http-client-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.4',
+            ),
         ),
         'symfony/polyfill-ctype' => array(
             'pretty_version' => 'v1.23.0',
@@ -715,7 +757,7 @@
             'install_path' => __DIR__ . '/../symfony/polyfill-php73',
             'aliases' => array(),
             'reference' => 'fba8933c384d6476ab14fb7b8526e5287ca7e010',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-php80' => array(
             'pretty_version' => 'v1.23.1',
@@ -751,7 +793,7 @@
             'install_path' => __DIR__ . '/../symfony/service-contracts',
             'aliases' => array(),
             'reference' => 'f040a30e04b57fbcc9c6cbcf4dbaa96bd318b9bb',
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/service-implementation' => array(
             'dev_requirement' => true,

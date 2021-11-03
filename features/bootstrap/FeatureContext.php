@@ -1,8 +1,28 @@
 <?php
 
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
+
+require 'testrail.php';
+
+//$client = new TestRailAPIClient('https://vsi.testrail.io/');
+//$client->set_user('whiletablesits@gmail.com');
+//$client->set_password('vsiTrade1111');
+//$case = $client->send_get('get_case/1');
+//var_dump($case);
+
+
+//$result = $client->send_post(
+//    'add_result_for_case/1/1',
+//    array(
+//        'status_id' => 1,
+//        'comment' => 'This test worked fine!'
+//    )
+//);
+
+//var_dump($result);
 
 /**
  * Defines application features from the specific context.
@@ -22,7 +42,7 @@ class FeatureContext extends RawMinkContext implements Context
 //            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -42,7 +62,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -61,7 +81,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -82,7 +102,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -103,7 +123,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -124,7 +144,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -137,13 +157,13 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('css', '.phone img');
             if ($element->isVisible()) {
-                echo 'VISIBLE'  . " | " . $element->getAttribute('alt');
+                echo 'VISIBLE' . " | " . $element->getAttribute('alt');
             } else {
-                echo 'NOT FOUND'  . " | " . $element->getText();
+                echo 'NOT FOUND' . " | " . $element->getText();
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -157,13 +177,13 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->find('css', '.login');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE'  . " | " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND'  . " | " . $element->getText();
+                echo 'NOT FOUND' . " | " . $element->getText();
             }
         } catch (Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -184,7 +204,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -196,7 +216,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $handle = curl_init('https://birzha.tech/login');
+
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+
             $response = curl_exec($handle);
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
             if ($httpCode == 200) {
@@ -207,7 +229,7 @@ class FeatureContext extends RawMinkContext implements Context
             curl_close($handle);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -227,7 +249,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -247,7 +269,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -268,7 +290,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -290,12 +312,10 @@ class FeatureContext extends RawMinkContext implements Context
             curl_close($handle);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
 
     }
-
-
 
 
     /**
@@ -315,7 +335,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -336,7 +356,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -351,7 +371,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -372,7 +392,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -393,7 +413,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -413,7 +433,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -424,17 +444,17 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $elements = $page->findAll('xpath', '/html/body/main/div/div/form/label[1]');
-            foreach ($elements as $element) {
-                if ($element->getText() == 'Логін') {
-                    echo 'PASSED' . " | " . $element->getText();
-                } else {
-                    echo 'FALSE' . $element->getText();
-                }
+            $element = $page->find('xpath', '/html/body/main/div/div/form/label[1]/for');
+            var_dump($element);
+            if ($element->getText() == 'Логін') {
+                echo 'PASSED' . " | " . $element->getText();
+            } else {
+                echo 'FALSE' . $element->getText();
             }
+
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -462,7 +482,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -483,7 +503,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -519,7 +539,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -541,7 +561,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -561,7 +581,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -582,7 +602,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -594,15 +614,15 @@ class FeatureContext extends RawMinkContext implements Context
         try {
             $page = $this->getSession()->getPage();
             $element = $page->findButton('Авторизуватися');
-                if ($element->isVisible()) {
-                    $element->click();
-                }
+            if ($element->isVisible()) {
+                $element->click();
+            }
             echo $this->getSession()->getCurrentUrl();
-            $filename = "login_success." . date('l jS h:i:s A').".png";
-            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
+            $filename = "login_success." . date('l jS h:i:s A') . ".png";
+            file_put_contents('screenshots/' . $filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -624,7 +644,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -641,7 +661,7 @@ class FeatureContext extends RawMinkContext implements Context
 //            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -660,7 +680,7 @@ class FeatureContext extends RawMinkContext implements Context
 //            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -679,7 +699,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
 
     }
@@ -699,7 +719,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -721,7 +741,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
 
     }
@@ -741,7 +761,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -762,7 +782,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -782,7 +802,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -801,7 +821,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -820,7 +840,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -842,7 +862,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -863,7 +883,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -882,7 +902,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -903,7 +923,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -924,7 +944,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -945,7 +965,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -965,7 +985,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -985,7 +1005,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $element->getValue();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1005,7 +1025,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $element->getValue();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1024,7 +1044,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1047,7 +1067,7 @@ class FeatureContext extends RawMinkContext implements Context
 //            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1069,7 +1089,7 @@ class FeatureContext extends RawMinkContext implements Context
 //            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
 
         }
     }
@@ -1089,7 +1109,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1109,7 +1129,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1129,7 +1149,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1192,7 +1212,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1238,7 +1258,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1267,7 +1287,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1288,7 +1308,7 @@ class FeatureContext extends RawMinkContext implements Context
             $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1305,7 +1325,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1332,7 +1352,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1352,7 +1372,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1373,7 +1393,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1390,7 +1410,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1409,7 +1429,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1429,7 +1449,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
 
     }
@@ -1459,7 +1479,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1484,7 +1504,7 @@ class FeatureContext extends RawMinkContext implements Context
             curl_close($handle);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1519,7 +1539,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1538,7 +1558,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1557,7 +1577,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1576,7 +1596,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1595,7 +1615,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1614,7 +1634,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1633,7 +1653,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1652,7 +1672,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         };
     }
 
@@ -1671,7 +1691,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1690,7 +1710,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1709,7 +1729,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1728,7 +1748,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1763,7 +1783,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1782,7 +1802,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1817,7 +1837,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1836,7 +1856,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1855,7 +1875,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1874,7 +1894,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1893,7 +1913,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1912,7 +1932,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1931,7 +1951,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1950,7 +1970,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1969,7 +1989,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -1988,7 +2008,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2007,7 +2027,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2026,7 +2046,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2045,7 +2065,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2064,7 +2084,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2083,7 +2103,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2102,7 +2122,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2153,7 +2173,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2172,7 +2192,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2231,7 +2251,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2250,7 +2270,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2285,7 +2305,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2304,7 +2324,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2323,7 +2343,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2343,7 +2363,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2363,7 +2383,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2383,7 +2403,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2402,7 +2422,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2421,7 +2441,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2440,7 +2460,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2459,7 +2479,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2478,7 +2498,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2497,7 +2517,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2516,7 +2536,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2535,7 +2555,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2555,7 +2575,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2574,7 +2594,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2609,7 +2629,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2628,7 +2648,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2647,7 +2667,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2666,7 +2686,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2685,7 +2705,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2705,7 +2725,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2724,7 +2744,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2743,7 +2763,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2762,7 +2782,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2783,7 +2803,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2795,14 +2815,14 @@ class FeatureContext extends RawMinkContext implements Context
         try {
             $page = $this->getSession()->getPage();
             $elements = $page->findLink('Заяви');
-                if ($elements->getAttribute('href') == '/') {
-                    echo 'PASSED'  . " | " . $elements->getAttribute('href');
-                } else {
-                    echo 'FALSE';
-                }
+            if ($elements->getAttribute('href') == '/') {
+                echo 'PASSED' . " | " . $elements->getAttribute('href');
+            } else {
+                echo 'FALSE';
+            }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2822,7 +2842,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2842,7 +2862,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2856,17 +2876,16 @@ class FeatureContext extends RawMinkContext implements Context
             $elements = $page->findLink('Мої заяви');
 //            foreach ($elements as $element) {
             if ($elements->getAttribute('href') == '/mylots') {
-                echo 'PASSED'  . " | " . $elements->getAttribute('href');
+                echo 'PASSED' . " | " . $elements->getAttribute('href');
             } else {
                 echo 'FALSE';
             }
 //            }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
-
 
 
     /**
@@ -2886,7 +2905,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2900,13 +2919,13 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->find('css', '.logout');
 
             if ($element->isVisible()) {
-                echo 'VISIBLE'  . " | " . $element->getText();
+                echo 'VISIBLE' . " | " . $element->getText();
             } else {
-                echo 'NOT FOUND'  . " | " . $element->getText();
+                echo 'NOT FOUND' . " | " . $element->getText();
             }
         } catch (Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2927,7 +2946,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2948,7 +2967,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2968,7 +2987,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -2978,9 +2997,9 @@ class FeatureContext extends RawMinkContext implements Context
     public function theReturnCodeOfURLFromAttributeHrefOfObjectLog_outShouldBeEqualToTwoHundred()
     {
         try {
-        $page = $this->getSession()->getPage();
-        $element = $page->find('css', '.logout')->getAttribute('href');
-            $handle = curl_init('https://birzha.tech'. $element);
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '.logout')->getAttribute('href');
+            $handle = curl_init('https://birzha.tech' . $element);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
@@ -2992,7 +3011,7 @@ class FeatureContext extends RawMinkContext implements Context
             curl_close($handle);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3012,7 +3031,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3031,7 +3050,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3050,7 +3069,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3062,7 +3081,7 @@ class FeatureContext extends RawMinkContext implements Context
         try {
             $page = $this->getSession()->getPage();
             $element = $page->find('css', '.profile')->getAttribute('href');
-            $handle = curl_init('https://birzha.tech'. $element);
+            $handle = curl_init('https://birzha.tech' . $element);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
@@ -3074,7 +3093,7 @@ class FeatureContext extends RawMinkContext implements Context
             curl_close($handle);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3094,7 +3113,7 @@ class FeatureContext extends RawMinkContext implements Context
             echo $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3110,11 +3129,11 @@ class FeatureContext extends RawMinkContext implements Context
             } else {
                 echo 'FALSE';
             }
-            $filename = "profile." . date('l jS h:i:s A').".png";
-            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
+            $filename = "profile." . date('l jS h:i:s A') . ".png";
+            file_put_contents('screenshots/' . $filename, $this->getSession()->getDriver()->getScreenshot());
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3132,7 +3151,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3151,7 +3170,7 @@ class FeatureContext extends RawMinkContext implements Context
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/'.$e->getMessage().".".time().'.png', $this->getSession()->getDriver()->getScreenshot());
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
     }
 
@@ -3165,6 +3184,161 @@ class FeatureContext extends RawMinkContext implements Context
         $page = $this->getSession()->getPage();
         $page->findButton('Refresh Sessions')->click();
         $page->findButton('Take Screenshot')->click();
-        $session->visit($page->find('css','.modal-dialog-content a')->getAttribute('href'));
+        $session->visit($page->find('css', '.modal-dialog-content a')->getAttribute('href'));
+    }
+
+    /**
+     * @Given I have the payload:
+     */
+    public function iHaveThePayload(PyStringNode $string)
+    {
+        throw new PendingException();
+    }
+
+
+    /**
+     * @Then the response status code should be :arg1
+     */
+    public function theResponseStatusCodeShouldBe($arg1)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the :arg1 header should be :arg2
+     */
+    public function theHeaderShouldBe($arg1, $arg2)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then the :arg1 property should equal :arg2
+     */
+    public function thePropertyShouldEqual($arg1, $arg2)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then response
+     */
+    public function response()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @When /^request \\\\POST api\/registration\/add\\\\$/
+     */
+    public function requestPOSTApiRegistrationAdd()
+    {
+        try {
+            $postRequest = array(
+                'email' => 'wiiiiiiild.savedo@gmail.com',
+                'password' => '123456789',
+            );
+
+            $cURLConnection = curl_init('http://dev.birzha.tech/api/registration/add');
+            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+            $apiResponse = curl_exec($cURLConnection);
+            echo $apiResponse;
+            curl_close($cURLConnection);
+            $this->getSession()->wait(1000);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+
+        }
+    }
+
+    /**
+     * @Then /^request \\\\POST api\/registration\/type\\\\$/
+     */
+    public function requestPOSTApiRegistrationType()
+    {
+        try {
+            $postRequest = array(
+                'role' => 'ROLE_USER_BRO',
+                'type' => ' 1',
+            );
+
+            $cURLConnection = curl_init('http://dev.birzha.tech/api/registration/type');
+            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+            $apiResponse = curl_exec($cURLConnection);
+            echo $apiResponse;
+            curl_close($cURLConnection);
+            $this->getSession()->wait(1000);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+
+        }
+    }
+
+
+    /**
+     * @Then /^request \\\\POST api\/registration\/role\/bro\\\\$/
+     */
+    public function requestPOSTApiRegistrationRoleBro()
+    {
+        try {
+            $postRequest = array(
+                'firstname' => 'firstname',
+                'lastname' => 'lastname',
+                'patronymic' => 'patronymic',
+                'parametr_ecp' => 'parametr_ecp',
+                'country' => '1',
+                'postindex' => '1111',
+                'address' => 'address',
+                'region' => '1',
+                'phone' => 'phone',
+                'bank_name' => 'bank_name',
+                'bank_mfo' => 'bank_mfo',
+                'bank_check' => '1111',
+                'bank_swift' => 'bank_swift',
+                'field_office' => 'field_office',
+                'field_from' => 'field_from',
+
+            );
+            $cURLConnection = curl_init('http://dev.birzha.tech/api/registration/type/role/bro');
+            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+            $apiResponse = curl_exec($cURLConnection);
+            echo $apiResponse;
+            curl_close($cURLConnection);
+            $this->getSession()->wait(1000);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+
+        }
+    }
+
+    /**
+     * @Then /^request \\\\GET api\/login\\\\$/
+     */
+    public function requestGETApiLogin()
+    {
+        try {
+            $postRequest = array(
+                'email' => 'wild.savedo@gmail.com',
+                'password' => ' 123456789',
+            );
+
+            $cURLConnection = curl_init('http://dev.birzha.tech/api/login');
+            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
+            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+
+            $apiResponse = curl_exec($cURLConnection);
+            echo $apiResponse;
+            curl_close($cURLConnection);
+            $this->getSession()->wait(1000);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+
+        }
     }
 }
