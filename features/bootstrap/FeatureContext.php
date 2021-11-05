@@ -3234,6 +3234,13 @@ class FeatureContext extends RawMinkContext implements Context
     public function requestPOSTApiRegistrationAdd()
     {
         try {
+            try {
+                $db = new PDO("sqlite:".__DIR__."/birzhaAPI.sqlite");
+
+            } catch (Error | Exception $e) {
+                var_dump(123456); die;
+            }
+
             $postRequest = array(
                 'email' => 'wiiiiiiild.savedo@gmail.com',
                 'password' => '123456789',
@@ -3244,8 +3251,19 @@ class FeatureContext extends RawMinkContext implements Context
             curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
 
             $apiResponse = curl_exec($cURLConnection);
+            $httpCode = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+
             echo $apiResponse;
+            //$query = $db->query("INSERT into `.` VALUES ".$httpCode);
+
+
+            //$sql = "INSERT INTO registration (status) VALUES (200)";
+            $sql = 'SELECT * FROM registration';
+            $stmt=$db->query($sql);
+            $data = $stmt->fetch(\PDO::FETCH_ASSOC);
             curl_close($cURLConnection);
+
+var_dump($data);
             $this->getSession()->wait(1000);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -3340,5 +3358,13 @@ class FeatureContext extends RawMinkContext implements Context
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
 
         }
+    }
+
+    /**
+     * @Given /^guzzleHTTP$/
+     */
+    public function guzzlehttp()
+    {
+
     }
 }

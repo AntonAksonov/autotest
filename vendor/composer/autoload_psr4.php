@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'WebSocket\\' => array($vendorDir . '/textalk/websocket/lib'),
     'Symfony\\Polyfill\\Php81\\' => array($vendorDir . '/symfony/polyfill-php81'),
@@ -52,7 +52,9 @@ return array(
     'DMore\\ChromeDriver\\' => array($vendorDir . '/dmore/chrome-mink-driver/src'),
     'Behat\\Transliterator\\' => array($vendorDir . '/behat/transliterator/src/Behat/Transliterator'),
     'Behat\\Testwork\\' => array($vendorDir . '/behat/behat/src/Behat/Testwork'),
+    'Behat\\Step\\' => array($vendorDir . '/behat/behat/src/Behat/Step'),
     'Behat\\Mink\\Driver\\' => array($vendorDir . '/behat/mink-browserkit-driver/src', $vendorDir . '/behat/mink-goutte-driver/src', $vendorDir . '/behat/mink-selenium2-driver/src'),
     'Behat\\Mink\\' => array($vendorDir . '/behat/mink/src'),
+    'Behat\\Hook\\' => array($vendorDir . '/behat/behat/src/Behat/Hook'),
     'Behat\\Behat\\' => array($vendorDir . '/behat/behat/src/Behat/Behat'),
 );
