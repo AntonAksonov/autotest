@@ -3187,13 +3187,7 @@ class FeatureContext extends RawMinkContext implements Context
         $session->visit($page->find('css', '.modal-dialog-content a')->getAttribute('href'));
     }
 
-    /**
-     * @Given I have the payload:
-     */
-    public function iHaveThePayload(PyStringNode $string)
-    {
-        throw new PendingException();
-    }
+
 
 
     /**
@@ -3204,21 +3198,8 @@ class FeatureContext extends RawMinkContext implements Context
         throw new PendingException();
     }
 
-    /**
-     * @Then the :arg1 header should be :arg2
-     */
-    public function theHeaderShouldBe($arg1, $arg2)
-    {
-        throw new PendingException();
-    }
 
-    /**
-     * @Then the :arg1 property should equal :arg2
-     */
-    public function thePropertyShouldEqual($arg1, $arg2)
-    {
-        throw new PendingException();
-    }
+
 
     /**
      * @Then response
@@ -3235,7 +3216,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             try {
-                $db = new PDO("sqlite:".__DIR__."/birzhaAPI.sqlite");
+                $db = new PDO("sqlite:".__DIR__."\birzhaAPI.sqlite");
 
             } catch (Error | Exception $e) {
                 var_dump(123456); die;
