@@ -5,7 +5,7 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\MinkExtension\Context\RawMinkContext;
 
-require 'testrail.php';
+//require 'testrail.php';
 
 //$client = new TestRailAPIClient('https://vsi.testrail.io/');
 //$client->set_user('whiletablesits@gmail.com');
@@ -3188,8 +3188,6 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
 
-
-
     /**
      * @Then the response status code should be :arg1
      */
@@ -3197,8 +3195,6 @@ class FeatureContext extends RawMinkContext implements Context
     {
         throw new PendingException();
     }
-
-
 
 
     /**
@@ -3215,37 +3211,113 @@ class FeatureContext extends RawMinkContext implements Context
     public function requestPOSTApiRegistrationAdd()
     {
         try {
-            try {
-                $db = new PDO("sqlite:".__DIR__."\birzhaAPI.sqlite");
+            $pdo = new PDO('sqlite:api.db');
+            $statement = $pdo->query('SELECT * FROM api');
+            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($rows);
 
-            } catch (Error | Exception $e) {
-                var_dump(123456); die;
-            }
 
-            $postRequest = array(
-                'email' => 'wiiiiiiild.savedo@gmail.com',
+
+            $one = array(
+                'email' => 'willlld.savedo@gmail.com',
                 'password' => '123456789',
             );
 
-            $cURLConnection = curl_init('http://dev.birzha.tech/api/registration/add');
-            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
-            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+            $ch = curl_init('http://dev.birzha.tech/api/registration/add');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $one);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-            $apiResponse = curl_exec($cURLConnection);
-            $httpCode = curl_getinfo($cURLConnection, CURLINFO_HTTP_CODE);
+            $apiResponse = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            echo $httpCode;
+            echo $apiResponse . PHP_EOL;
 
-            echo $apiResponse;
-            //$query = $db->query("INSERT into `.` VALUES ".$httpCode);
+            curl_close($ch);
 
-
-            //$sql = "INSERT INTO registration (status) VALUES (200)";
-            $sql = 'SELECT * FROM registration';
-            $stmt=$db->query($sql);
-            $data = $stmt->fetch(\PDO::FETCH_ASSOC);
-            curl_close($cURLConnection);
-
-var_dump($data);
             $this->getSession()->wait(1000);
+
+
+//            if ( $httpCode === 200) {
+//                $two = array(
+//                    'role' => 'ROLE_USER_BRO',
+//                    'type' => 1,
+//                );
+//
+//                $ch = curl_init('http://dev.birzha.tech/api/registration/type');
+//                curl_setopt($ch, CURLOPT_POSTFIELDS, $two);
+//                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+//                $apiResponse = curl_exec($ch);
+//                echo $httpCode;
+//                echo $apiResponse;
+//
+//                curl_close($ch);
+//                $this->getSession()->wait(1000);
+//                if ( $httpCode === 200) {
+//                    $three = array(
+//                        'firstname' => 'firstname',
+//                        'lastname' => 'lastname',
+//                        'patronymic' => 'patronymic',
+//                        'parametr_ecp' => 'parametr_ecp',
+//                        'country' => '1',
+//                        'postindex' => '1111',
+//                        'address' => 'address',
+//                        'region' => '1',
+//                        'phone' => 'phone',
+//                        'bank_name' => 'bank_name',
+//                        'bank_mfo' => 'bank_mfo',
+//                        'bank_check' => '1111',
+//                        'bank_swift' => 'bank_swift',
+//                        'field_office' => 'field_office',
+//                        'field_from' => 'field_from',
+//
+//                    );
+//                    $ch = curl_init('http://dev.birzha.tech/api/registration/type/role/bro');
+//                    curl_setopt($ch, CURLOPT_POSTFIELDS, $three);
+//                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//
+//                    $apiResponse = curl_exec($ch);
+//                    echo $apiResponse;
+//                    curl_close($ch);
+//                    $this->getSession()->wait(1000);
+//                }
+//                else {
+//                    echo 'ERROR STEP 3';
+//                }
+//            }
+//            else {
+//                echo 'ERROR STEP 2';
+//            }
+//
+//
+//            $three = array(
+//                'firstname' => 'firstname',
+//                'lastname' => 'lastname',
+//                'patronymic' => 'patronymic',
+//                'parametr_ecp' => 'parametr_ecp',
+//                'country' => '1',
+//                'postindex' => '1111',
+//                'address' => 'address',
+//                'region' => '1',
+//                'phone' => 'phone',
+//                'bank_name' => 'bank_name',
+//                'bank_mfo' => 'bank_mfo',
+//                'bank_check' => '1111',
+//                'bank_swift' => 'bank_swift',
+//                'field_office' => 'field_office',
+//                'field_from' => 'field_from',
+//
+//            );
+//            $ch = curl_init('http://dev.birzha.tech/api/registration/type/role/bro');
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, $three);
+//            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//
+//            $apiResponse = curl_exec($ch);
+//            echo $apiResponse;
+//            curl_close($ch);
+//            $this->getSession()->wait(1000);
+
+
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
 
@@ -3263,13 +3335,13 @@ var_dump($data);
                 'type' => ' 1',
             );
 
-            $cURLConnection = curl_init('http://dev.birzha.tech/api/registration/type');
-            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
-            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+            $ch = curl_init('http://dev.birzha.tech/api/registration/type');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postRequest);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-            $apiResponse = curl_exec($cURLConnection);
+            $apiResponse = curl_exec($ch);
             echo $apiResponse;
-            curl_close($cURLConnection);
+            curl_close($ch);
             $this->getSession()->wait(1000);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -3302,13 +3374,13 @@ var_dump($data);
                 'field_from' => 'field_from',
 
             );
-            $cURLConnection = curl_init('http://dev.birzha.tech/api/registration/type/role/bro');
-            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
-            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+            $ch = curl_init('http://dev.birzha.tech/api/registration/type/role/bro');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postRequest);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-            $apiResponse = curl_exec($cURLConnection);
+            $apiResponse = curl_exec($ch);
             echo $apiResponse;
-            curl_close($cURLConnection);
+            curl_close($ch);
             $this->getSession()->wait(1000);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -3322,19 +3394,24 @@ var_dump($data);
     public function requestGETApiLogin()
     {
         try {
-            $postRequest = array(
-                'email' => 'wild.savedo@gmail.com',
-                'password' => ' 123456789',
-            );
+            $ch = curl_init();
+            $headers = curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'login=wild.savedo@gmail.com',
+                '&',
+                'password=123456789',
+            ));
+//            $headers = array(
+//                'login' => 'wild.savedo@gmail.com',
+//                '&',
+//                'password=123456789',
+//            );
+            curl_setopt($ch, CURLOPT_URL, 'http://dev.birzha.tech/api/login?'.implode($headers));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $apiResponse = curl_exec($ch);
 
-            $cURLConnection = curl_init('http://dev.birzha.tech/api/login');
-            curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
-            curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+            echo $apiResponse. PHP_EOL;
 
-            $apiResponse = curl_exec($cURLConnection);
-            echo $apiResponse;
-            curl_close($cURLConnection);
-            $this->getSession()->wait(1000);
+            curl_close($ch);
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
 
@@ -3342,10 +3419,293 @@ var_dump($data);
     }
 
     /**
-     * @Given /^guzzleHTTP$/
+     * @Then /^request \\\\GET api\/auctions\\\\$/
      */
-    public function guzzlehttp()
+    public function requestGETApiAuctions()
     {
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//            'id': 7,
+//            'category': {
+//                'id': 2,
+//                'name': 'Тест 2'
+//            },
+//            'title': 'fghfg',
+//            'content': 'fgh',
+//            "thumbnail": "6156f7e408bf4462433424.jpg",
+//            "attachments": [],
+//            "buy_sell": 1,
+//            "type": 1,
+//            "name": "fgh",
+//            "amount": 6,
+//            "price": 666,
+//            "cost": 5,
+//            "quantity": 2,
+//            "delivery_basis": "5",
+//            "delivery_warehouse": "5",
+//            "unit": "5",
+//            "vat": 2,
+//            "access_type": 2,
+//            "deal": 1,
+//            "auction": true,
+//            "start_date": {
+//                "date": "2021-10-01 14:57:00.000000",
+//                "timezone_type": 3,
+//                "timezone": "Europe/Moscow"
+            ));
 
+            curl_setopt($ch, CURLOPT_URL, 'http://dev.birzha.tech/api/auctions');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $apiResponse = curl_exec($ch);
+
+            echo $apiResponse. PHP_EOL;
+
+            curl_close($ch);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+
+        }
+    }
+
+
+
+    /**
+     * @Given navigate to {http:\/\/dev.birzha.tech\/admin\/login}
+     */
+    public function navigateToHttpsBirzhaTechAdminLogin()
+    {
+        try {
+            $session = $this->getSession();
+            $session->visit($this->locatePath('http://dev.birzha.tech/admin/login'));
+            echo $this->getSession()->getCurrentUrl();
+
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+
+
+}
+
+    /**
+     * @Given fill the \/inputLogin\/
+     */
+    public function fillTheInputlogin()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="inputLogin"]');
+            if ($element->isVisible()) {
+                $element->setValue('wild.savedo@gmail.com');
+            } else {
+                echo 'NOT FOUND';
+            }
+
+            echo $element->getValue();
+//            $filename = "main_login_number." . date('l jS h:i:s A').".png";
+//            file_put_contents('screenshots/'.$filename, $this->getSession()->getDriver()->getScreenshot());
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given fill the \/inputPassword\/
+     */
+    public function fillTheInputpassword()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '//*[@id="inputPassword"]');
+            if ($element->isVisible()) {
+                $element->setValue('123456789');
+            } else {
+                echo 'NOT FOUND';
+            }
+
+            echo $element->getValue();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given click \/submit\/
+     */
+    public function clickSubmit()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.btn-lg');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then the current URL should be equal to {https:\/\/birzha.tech\/admin}
+     */
+    public function theCurrentUrlShouldBeEqualToHttpsBirzhaTechAdmin()
+    {
+        try {
+            if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/admin') {
+                echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
+            }
+            else {
+                echo 'WRONG URL';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then click \/pushmenu\/
+     */
+    public function clickPushmenu()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('css', '.pushmenu');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then check all links status codes
+     */
+    public function checkAllLinksStatusCodes()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[1]/a')->getAttribute('href');
+            $handle = curl_init('https://birzha.tech' . $element);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+            $response = curl_exec($handle);
+            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            if ($httpCode == 200) {
+                echo 'STATUS CODE 200 | ' . PHP_EOL;
+            } else {
+                echo $httpCode;
+            }
+            curl_close($handle);
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+
+            try {
+                $page = $this->getSession()->getPage();
+                $element = $page->find('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[2]/a')->getAttribute('href');
+                $handle = curl_init('https://birzha.tech' . $element);
+                curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+                $response = curl_exec($handle);
+                $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+                if ($httpCode == 200) {
+                    echo 'STATUS CODE 200 | ' . PHP_EOL;
+                } else {
+                    echo $httpCode;
+                }
+                curl_close($handle);
+            } catch (Error | Exception $e) {
+                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+                file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+            }
+
+            try {
+                $page = $this->getSession()->getPage();
+                $element = $page->find('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[3]/a')->getAttribute('href');
+                $handle = curl_init('https://birzha.tech' . $element);
+                curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+                $response = curl_exec($handle);
+                $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+                if ($httpCode == 200) {
+                    echo 'STATUS CODE 200 | ' . PHP_EOL;
+                } else {
+                    echo $httpCode;
+                }
+                curl_close($handle);
+            } catch (Error | Exception $e) {
+                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+                file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+            }
+        }
+    }
+
+    /**
+     * @Then click \/categories\/
+     */
+    public function clickCategories()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[1]/a');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then click \/auctions\/
+     */
+    public function clickAuctions()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[2]/a');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then click \/users\/
+     */
+    public function clickUsers()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->findAll('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[3]/a');
+            foreach ($element as $item) {
+                if ($item->isVisible()) {
+                    $item->click();
+                }
+            }
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 }

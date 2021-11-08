@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6765225879db8c346325b11b8d05e609e4015f2e',
+        'reference' => '763e26f5ae5506d2c736cb57d1d71834470ed5c0',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6765225879db8c346325b11b8d05e609e4015f2e',
+            'reference' => '763e26f5ae5506d2c736cb57d1d71834470ed5c0',
             'dev_requirement' => false,
         ),
         'applitools/eyes.sdk.php' => array(
@@ -211,12 +211,12 @@
             ),
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v4.13.0',
-            'version' => '4.13.0.0',
+            'pretty_version' => 'v4.13.1',
+            'version' => '4.13.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
-            'reference' => '50953a2691a922aa1769461637869a0a2faa3f53',
+            'reference' => '63a79e8daa781cac14e5195e63ed8ae231dd10fd',
             'dev_requirement' => true,
         ),
         'phar-io/manifest' => array(
