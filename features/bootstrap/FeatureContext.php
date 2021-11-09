@@ -3596,7 +3596,8 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[1]/a')->getAttribute('href');
+            $element = $page->find('css', '.categories');
+           var_dump($element->getAttribute('href'));
             $handle = curl_init('https://birzha.tech' . $element);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
@@ -3613,7 +3614,7 @@ class FeatureContext extends RawMinkContext implements Context
 
             try {
                 $page = $this->getSession()->getPage();
-                $element = $page->find('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[2]/a')->getAttribute('href');
+                $element = $page->find('css', '.auctions')->getAttribute('href');
                 $handle = curl_init('https://birzha.tech' . $element);
                 curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
                 $response = curl_exec($handle);
@@ -3631,7 +3632,7 @@ class FeatureContext extends RawMinkContext implements Context
 
             try {
                 $page = $this->getSession()->getPage();
-                $element = $page->find('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[3]/a')->getAttribute('href');
+                $element = $page->find('css', '.auctions')->getAttribute('href');
                 $handle = curl_init('https://birzha.tech' . $element);
                 curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
                 $response = curl_exec($handle);
@@ -3656,7 +3657,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[1]/a');
+            $element = $page->findAll('css', '.categories');
             foreach ($element as $item) {
                 if ($item->isVisible()) {
                     $item->click();
@@ -3676,7 +3677,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->findAll('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[2]/a');
+            $element = $page->findAll('css', '.auctions');
             foreach ($element as $item) {
                 if ($item->isVisible()) {
                     $item->click();
