@@ -3217,7 +3217,6 @@ class FeatureContext extends RawMinkContext implements Context
             var_dump($rows);
 
 
-
             $one = array(
                 'email' => 'willlld.savedo@gmail.com',
                 'password' => '123456789',
@@ -3405,11 +3404,11 @@ class FeatureContext extends RawMinkContext implements Context
 //                '&',
 //                'password=123456789',
 //            );
-            curl_setopt($ch, CURLOPT_URL, 'http://dev.birzha.tech/api/login?'.implode($headers));
+            curl_setopt($ch, CURLOPT_URL, 'http://dev.birzha.tech/api/login?' . implode($headers));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $apiResponse = curl_exec($ch);
 
-            echo $apiResponse. PHP_EOL;
+            echo $apiResponse . PHP_EOL;
 
             curl_close($ch);
         } catch (Error | Exception $e) {
@@ -3459,7 +3458,7 @@ class FeatureContext extends RawMinkContext implements Context
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $apiResponse = curl_exec($ch);
 
-            echo $apiResponse. PHP_EOL;
+            echo $apiResponse . PHP_EOL;
 
             curl_close($ch);
         } catch (Error | Exception $e) {
@@ -3467,7 +3466,6 @@ class FeatureContext extends RawMinkContext implements Context
 
         }
     }
-
 
 
     /**
@@ -3486,7 +3484,7 @@ class FeatureContext extends RawMinkContext implements Context
         }
 
 
-}
+    }
 
     /**
      * @Given fill the \/inputLogin\/
@@ -3553,16 +3551,15 @@ class FeatureContext extends RawMinkContext implements Context
     }
 
     /**
-     * @Then the current URL should be equal to {https:\/\/birzha.tech\/admin}
+     * @Then check URL
      */
     public function theCurrentUrlShouldBeEqualToHttpsBirzhaTechAdmin()
     {
         try {
             if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/admin') {
                 echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
-            }
-            else {
-                echo 'WRONG URL';
+            } else {
+                echo 'WRONG URL' . $this->getSession()->getCurrentUrl() . PHP_EOL;
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -3596,9 +3593,8 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css', '.categories');
-           var_dump($element->getAttribute('href'));
-            $handle = curl_init('https://birzha.tech' . $element);
+            $element = $page->find('css', '.homepage')->getAttribute('href');
+            $handle = curl_init('http://dev.birzha.tech/' . $element);
             curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
             $response = curl_exec($handle);
             $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
@@ -3609,9 +3605,26 @@ class FeatureContext extends RawMinkContext implements Context
             }
             curl_close($handle);
         } catch (Error | Exception $e) {
-            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage() . PHP_EOL;
             file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
 
+            try {
+                $page = $this->getSession()->getPage();
+                $element = $page->find('css', '.categories')->getAttribute('href');
+                $handle = curl_init('https://birzha.tech' . $element);
+                curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
+                $response = curl_exec($handle);
+                $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+                if ($httpCode == 200) {
+                    echo 'STATUS CODE 200 | ' . PHP_EOL;
+                } else {
+                    echo $httpCode;
+                }
+                curl_close($handle);
+            } catch (Error | Exception $e) {
+                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage() . PHP_EOL;
+                file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+            }
             try {
                 $page = $this->getSession()->getPage();
                 $element = $page->find('css', '.auctions')->getAttribute('href');
@@ -3626,13 +3639,13 @@ class FeatureContext extends RawMinkContext implements Context
                 }
                 curl_close($handle);
             } catch (Error | Exception $e) {
-                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage() . PHP_EOL;
                 file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
             }
 
             try {
                 $page = $this->getSession()->getPage();
-                $element = $page->find('css', '.auctions')->getAttribute('href');
+                $element = $page->find('css', '.users')->getAttribute('href');
                 $handle = curl_init('https://birzha.tech' . $element);
                 curl_setopt($handle, CURLOPT_RETURNTRANSFER, TRUE);
                 $response = curl_exec($handle);
@@ -3644,7 +3657,7 @@ class FeatureContext extends RawMinkContext implements Context
                 }
                 curl_close($handle);
             } catch (Error | Exception $e) {
-                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+                echo " ------------------------ FAILED ------------------------------ " . $e->getMessage() . PHP_EOL;
                 file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
             }
         }
@@ -3708,5 +3721,558 @@ class FeatureContext extends RawMinkContext implements Context
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
             file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
+    }
+
+    /**
+     * @Then click \/add\/
+     */
+    public function clickAdd()
+    {
+        try {
+            $this->getSession()->getPage()->find('css', '.add')->click();
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then fill in category name
+     */
+    public function fillInCategoryName()
+    {
+        try {
+            $this->getSession()->getPage()->findField('.admin_category_name')->setValue('auto_test');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then choose active status
+     */
+    public function chooseActiveStatus()
+    {
+        try {
+            $this->getSession()->getPage()->findById('admin_category_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then click \/add_attribute\/
+     */
+    public function clickAddAttribute()
+    {
+        try {
+            $this->getSession()->getPage()->findById('.add_attribute')->click();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then fill in the name of attribute
+     */
+    public function fillInTheNameOfAttribute()
+    {
+        try {
+            $this->getSession()->getPage()->findField('.admin_category_name')->setValue('auto_test');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then click \/save\/
+     */
+    public function clickSave()
+    {
+        try {
+            $this->getSession()->getPage()->findById('.save')->click();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then check current URL
+     */
+    public function checkCurrentUtl()
+    {
+        try {
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then check if new category is added
+     */
+    public function checkIfCategoryIsAdded()
+    {
+        try {
+            $this->getSession()->getPage()->find('named', 'auto_test');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then add another category
+     */
+    public function addAnotherCategory()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $page->find('css', '.add')->click();
+            $page->findField('.admin_category_name')->setValue('auto_test_to_delete');
+            $page->findById('admin_category_active')->setValue('1');
+            $page->findById('.add_attribute')->click();
+            $page->findField('.admin_category_name')->setValue('auto_test_to delete');
+            $page->findById('.save')->click();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then delete it
+     */
+    public function deleteIt()
+    {
+        try {
+
+            $page = $this->getSession()->getPage();
+            $page->findById('.checkbox')->click();
+            $page->findButton('.delete')->click();
+            if (
+                $page->find('named', 'auto_test') == null) {
+                echo 'SUCCESS, CATEGORY DELETED';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then check if search is working
+     */
+    public function checkIfSearchIsWorking()
+    {
+        try {
+            $this->getSession()->getPage()->findField('.search')->setValue('auto_test');
+            $this->getSession()->getPage()->findButton('.search_button')->click();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then /^click edit on new category$/
+     */
+    public function clickEditOnNewCategory()
+    {
+        try {
+            $this->getSession()->getPage()->findById( '.edit')->click();
+            echo $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then /^fill in auction name$/
+     */
+    public function fillInAuctionName()
+    {
+        try {
+            $this->getSession()->getPage()->findField('.auctions_title')->setValue('auto_test');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Then check current UTL
+     */
+    public function checkCurrentUtl2()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in item name
+     */
+    public function fillInItemName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in description
+     */
+    public function fillInDescription()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose category
+     */
+    public function chooseCategory()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose buy or sell
+     */
+    public function chooseBuyOrSell()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose type
+     */
+    public function chooseType()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in price
+     */
+    public function fillInPrice()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in amount of auctions
+     */
+    public function fillInAmountOfAuctions()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in delivery basis
+     */
+    public function fillInDeliveryBasis()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in delivery warehouse
+     */
+    public function fillInDeliveryWarehouse()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in units
+     */
+    public function fillInUnits()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose VAT
+     */
+    public function chooseVat()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose access type
+     */
+    public function chooseAccessType()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose deal type
+     */
+    public function chooseDealType()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then check in auctions checkbox
+     */
+    public function checkInAuctionsCheckbox()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose start date
+     */
+    public function chooseStartDate()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose end date
+     */
+    public function chooseEndDate()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in auctions spacing
+     */
+    public function fillInAuctionsSpacing()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fil in guarantee
+     */
+    public function filInGuarantee()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in auctions step
+     */
+    public function fillInAuctionsStep()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in start price
+     */
+    public function fillInStartPrice()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in clients list
+     */
+    public function fillInClientsList()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose image file
+     */
+    public function chooseImageFile()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then click \/add image\/
+     */
+    public function clickAddImage()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then check if new auction is added
+     */
+    public function checkIfNewAuctionIsAdded()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then click on new auction to edit it
+     */
+    public function clickOnNewAuctionToEditIt()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then add another auction
+     */
+    public function addAnotherAuction()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then delete this auction
+     */
+    public function deleteThisAuction()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then click on user to edit it`s info
+     */
+    public function clickOnUserToEditItSInfo()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in email
+     */
+    public function fillInEmail()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in password
+     */
+    public function fillInPassword()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose user role
+     */
+    public function chooseUserRole()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then choose user type
+     */
+    public function chooseUserType()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in first name
+     */
+    public function fillInFirstName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in second name
+     */
+    public function fillInSecondName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in last name
+     */
+    public function fillInLastName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in ECP
+     */
+    public function fillInEcp()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in index
+     */
+    public function fillInIndex()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in adress
+     */
+    public function fillInAdress()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in phone number
+     */
+    public function fillInPhoneNumber()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in bank name
+     */
+    public function fillInBankName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in MFO
+     */
+    public function fillInMfo()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in account number
+     */
+    public function fillInAccountNumber()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in SWIFT
+     */
+    public function fillInSwift()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in your office
+     */
+    public function fillInYourOffice()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in representative
+     */
+    public function fillInRepresentative()
+    {
+        throw new PendingException();
     }
 }
