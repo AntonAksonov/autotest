@@ -85,6 +85,7 @@ class ComposerStaticInit2f418bfeb1780e41c18ec62b3e2c3cfe
         ),
         'F' => 
         array (
+            'Faker\\' => 6,
             'Facebook\\WebDriver\\' => 19,
         ),
         'D' => 
@@ -267,6 +268,10 @@ class ComposerStaticInit2f418bfeb1780e41c18ec62b3e2c3cfe
         'Goutte\\' => 
         array (
             0 => __DIR__ . '/..' . '/fabpot/goutte/Goutte',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'Facebook\\WebDriver\\' => 
         array (

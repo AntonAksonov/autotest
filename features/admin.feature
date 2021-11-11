@@ -6,6 +6,7 @@ Feature: adminKO   -------------------------------------------------------------
     And fill the /inputPassword/
     And click /submit/
 
+
   Scenario: menu, links, buttons
 
     Then check URL
@@ -22,7 +23,7 @@ Feature: adminKO   -------------------------------------------------------------
     And fill in the name of attribute
     Then click /save/
 
-    Then check current UTL
+    Then check current URL
     And check if new category is added
 
     Then click edit on new category
@@ -32,8 +33,7 @@ Feature: adminKO   -------------------------------------------------------------
     And fill in the name of attribute
     Then click /save/
 
-    Then check current UTL
-
+    Then check current URL
 
 
     Then add another category
@@ -64,13 +64,13 @@ Feature: adminKO   -------------------------------------------------------------
     And choose start date
     And choose end date
     And fill in auctions spacing
-    And fil in guarantee
+    And fill in guarantee
     And fill in auctions spacing
     And fill in auctions step
     And fill in start price
     And fill in auctions step
     And fill in clients list
-    And choose image file
+    And attach image file
     And click /add image/
     Then click /save/
 
@@ -97,7 +97,7 @@ Feature: adminKO   -------------------------------------------------------------
     And choose start date
     And choose end date
     And fill in auctions spacing
-    And fil in guarantee
+    And fill in guarantee
     And fill in auctions spacing
     And fill in auctions step
     And fill in start price
