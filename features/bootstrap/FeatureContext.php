@@ -3480,9 +3480,12 @@ class FeatureContext extends RawMinkContext implements Context
     public function navigateToHttpsBirzhaTechAdminLogin()
     {
         try {
+
             $session = $this->getSession();
             $session->visit($this->locatePath('http://dev.birzha.tech/admin/login'));
+            $this->getSession()->wait(10, 1000);
             echo 'You are here -> ' . $this->getSession()->getCurrentUrl();
+            file_put_contents('screenshots/'. "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
 
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -3501,7 +3504,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('xpath', '//*[@id="inputLogin"]');
             if ($element->isVisible()) {
-                $element->setValue('wild.savedo@gmail.com');
+                $element->setValue('admin');
             } else {
                 echo 'NOT FOUND';
             }
@@ -3524,7 +3527,7 @@ class FeatureContext extends RawMinkContext implements Context
             $page = $this->getSession()->getPage();
             $element = $page->find('xpath', '//*[@id="inputPassword"]');
             if ($element->isVisible()) {
-                $element->setValue('123456789');
+                $element->setValue('123123123');
             } else {
                 echo 'NOT FOUND';
             }
@@ -3560,7 +3563,7 @@ class FeatureContext extends RawMinkContext implements Context
             if ($this->getSession()->getCurrentUrl() == 'https://birzha.tech/admin') {
                 echo 'PASSED |' . 'CURRENT URL: ' . $this->getSession()->getCurrentUrl();
             } else {
-                echo 'WRONG URL' . $this->getSession()->getCurrentUrl() . PHP_EOL;
+                echo $this->getSession()->getCurrentUrl() . PHP_EOL;
             }
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
@@ -3750,7 +3753,8 @@ class FeatureContext extends RawMinkContext implements Context
     public function chooseActiveStatus()
     {
         try {
-            $this->getSession()->getPage()->find('css','#admin_category_active')->setValue('1');
+            $this->getSession()->getPage()->find('css','#auctions_active')->click();
+            setValue('1');
         } catch (Error | Exception $e) {
             echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
             file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
@@ -3917,7 +3921,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_title');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
             } else {
@@ -3937,7 +3941,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_name');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
             } else {
@@ -3956,7 +3960,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_content');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
             } else {
@@ -3973,7 +3977,18 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseCategory()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css','#auctions_category');
+            if ($element->isVisible()) {
+                $element->setValue(2);
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -3981,7 +3996,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseBuyOrSell()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -3989,7 +4009,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseType()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -3999,9 +4024,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_price');
             if ($element->isVisible()) {
-                $element->setValue(Faker\Factory::create()->userName);
+                $element->setValue(Faker\Factory::create()->randomNumber());
             } else {
                 echo 'NOT FOUND';
             }
@@ -4018,9 +4043,9 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_quantity');
             if ($element->isVisible()) {
-                $element->setValue(Faker\Factory::create()->userName);
+                $element->setValue(Faker\Factory::create()->randomNumber());
             } else {
                 echo 'NOT FOUND';
             }
@@ -4037,7 +4062,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_deliveryBasis');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
             } else {
@@ -4056,7 +4081,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_deliveryWarehouse');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
             } else {
@@ -4075,7 +4100,7 @@ class FeatureContext extends RawMinkContext implements Context
     {
         try {
             $page = $this->getSession()->getPage();
-            $element = $page->find('css','#admin_category_name');
+            $element = $page->find('css','#auctions_unit');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
             } else {
@@ -4092,7 +4117,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseVat()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4100,7 +4130,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseAccessType()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4108,7 +4143,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseDealType()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4124,7 +4164,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseStartDate()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4132,7 +4177,12 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function chooseEndDate()
     {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css','#auctions_active')->setValue('1');
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4221,25 +4271,6 @@ class FeatureContext extends RawMinkContext implements Context
             $element = $page->find('css','#admin_category_name');
             if ($element->isVisible()) {
                 $element->setValue(Faker\Factory::create()->userName);
-            } else {
-                echo 'NOT FOUND';
-            }
-        } catch (Error | Exception $e) {
-            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
-            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
-        }
-    }
-
-    /**
-     * @Then attach image file
-     */
-    public function attachImageFile()
-    {
-        try {
-            $page = $this->getSession()->getPage();
-            $element = $page->find('css', '#admin_category_name');
-            if ($element->isVisible()) {
-                $element->attachFile('images/auto_test_goose.jpg');
             } else {
                 echo 'NOT FOUND';
             }
@@ -4615,5 +4646,116 @@ class FeatureContext extends RawMinkContext implements Context
     public function goToAdminka()
     {
         throw new PendingException();
+    }
+
+    /**
+     * @Then /^additional step navigate to \{http:\/\/dev\.birzha\.tech\}$/
+     */
+    public function additionalStepNavigateToHttpDevBirzhaTech()
+    {
+        $session = $this->getSession();
+        $session->visit($this->locatePath('http://dev.birzha.tech/admin/login'));
+        $this->getSession()->wait('5000');
+        $this->getSession()->getPage()->find('css', '.login')->click();
+        $session->visit($this->locatePath('http://dev.birzha.tech/'));
+        $this->getSession()->wait('5000');
+        $page = $this->getSession()->getPage();
+        $element = $page->find('xpath', '//*[@id="root"]/div[1]/div[2]/div[3]/input');
+        if ($element->isVisible()) {
+            $element->setValue('admin');
+        } else {
+            echo 'NOT FOUND';
+        }
+        $this->getSession()->getPage()->find('css', '.Authorization_button__3Oeq8')->click();
+        $this->getSession()->wait('5000');
+        echo $this->getSession()->getCurrentUrl();
+
+    }
+
+    /**
+     * @Given /^navigate to \{http:\/\/dev\.birzha\.tech\/registration\}$/
+     */
+    public function navigateToHttpDevBirzhaTechRegistration()
+    {
+        try {
+            $session = $this->getSession();
+            $session->visit($this->locatePath('http://dev.birzha.tech/registration'));
+            echo 'You are here -> ' . $this->getSession()->getCurrentUrl();
+
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given /^fill in amount$/
+     */
+    public function fillInAmount()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css','#auctions_amount');
+            if ($element->isVisible()) {
+                $element->setValue(Faker\Factory::create()->randomNumber());
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given /^attach image file$/
+     */
+    public function attachImageFile()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css', '#admin_category_name');
+            if ($element->isVisible()) {
+                $element->attachFile('images/auto_test_goose.jpg');
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given /^edit \/add_attribute\/$/
+     */
+    public function editAdd_attribute()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $page->find('css','.add-another-collection-widget .btn')->click();
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
+    }
+
+    /**
+     * @Given /^edit in the name of attribute$/
+     */
+    public function editInTheNameOfAttribute()
+    {
+        try {
+            $page = $this->getSession()->getPage();
+            $element = $page->find('css','#admin_category_categorycharacteristics_1000_characteristics');
+            if ($element->isVisible()) {
+                $element->setValue(Faker\Factory::create()->userName);
+            } else {
+                echo 'NOT FOUND';
+            }
+        } catch (Error | Exception $e) {
+            echo " ------------------------ FAILED ------------------------------ " . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . time() . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 }

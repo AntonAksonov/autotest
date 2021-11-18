@@ -1,6 +1,7 @@
 Feature: adminKO   ------------------------------------------------------------------------------------
 
   Background:
+#    Then additional step navigate to {http://dev.birzha.tech}
     Given navigate to {http://dev.birzha.tech/admin/login}
     And fill the /inputLogin/
     And fill the /inputPassword/
@@ -12,7 +13,7 @@ Feature: adminKO   -------------------------------------------------------------
     Then check URL
 
     Then click /pushmenu/
-    And check all links status codes
+#    And check all links status codes
 
   Then click /categories/
 
@@ -24,22 +25,22 @@ Feature: adminKO   -------------------------------------------------------------
     Then click /save/
 
     Then check current URL
-    And check if new category is added
+#    And check if new category is added
 
     Then click edit on new category
     Then fill in category name
     And choose active status
-    And click /add_attribute/
-    And fill in the name of attribute
+    And edit /add_attribute/
+    And edit in the name of attribute
     Then click /save/
 
     Then check current URL
 
 
-    Then add another category
-    And delete it
+#    Then add another category
+#    And delete it
 
-    Then check if search is working
+#    Then check if search is working
 
     Then click /pushmenu/
     And click /auctions/
@@ -53,6 +54,7 @@ Feature: adminKO   -------------------------------------------------------------
     And choose buy or sell
     And choose type
     And fill in price
+    And fill in amount
     And fill in amount of auctions
     And fill in delivery basis
     And fill in delivery warehouse
@@ -103,7 +105,7 @@ Feature: adminKO   -------------------------------------------------------------
     And fill in start price
     And fill in auctions step
     And fill in clients list
-    And choose image file
+    And attach image file
     And click /add image/
     Then click /save/
 
