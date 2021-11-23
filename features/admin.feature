@@ -8,7 +8,7 @@ Feature: ADMIN
     And click /submit/
 
 
-  Scenario: CATEGORIES (create,edit,delete)
+  Scenario: CREATE CATEGORY
 
     Then check URL
 
@@ -24,6 +24,10 @@ Feature: ADMIN
     And fill in the name of attribute
     Then click /save/
 
+  Scenario: EDIT CATEGORY
+
+    Then click /pushmenu/
+    Then click /categories/
     Then check current URL
 #    And check if new category is added
 
@@ -36,15 +40,24 @@ Feature: ADMIN
 
     Then check current URL
 
-
-    Then add another category
+  Scenario: CREATE AND DELETE CATEGORY
+#    Then add another category
+    Then click /pushmenu/
+    Then click /categories/
+    Then check current URL
+    Then click /add/
+    Then fill in category name
+    And choose active status
+    And click /add_attribute/
+    And fill in the name of attribute
+    Then click /save/
     And delete it
 
 #    Then check if search is working
 
 
 
-  Scenario: AUCTION (create,edit,delete)
+  Scenario: CREATE AUCTION
 
     Then click /pushmenu/
     And click /auctions/
@@ -74,12 +87,13 @@ Feature: ADMIN
     And fill in auctions spacing
     And fill in auctions step
     And fill in start price
-    And fill in auctions step
     And fill in clients list
     And attach image file
+    And check in hide author checkbox
     And click /add image/
-    Then click /save/
+    Then click /save/ auction
 
+  Scenario: EDIT CATEGORY
     Then check current URL
     And check if new auction is added
 
@@ -142,5 +156,5 @@ Feature: ADMIN
     Then fill in your office
     Then fill in representative
     Then click /save/
-
+#
 
