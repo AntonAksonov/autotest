@@ -7,6 +7,28 @@ default:
         default:
           selenium2:
             wd_host: "http://127.0.0.1:4444/wd/hub"
+    emuse\BehatHTMLFormatter\BehatHTMLFormatterExtension:
+      name: html
+      renderer: Twig,Behat2
+      file_name: index
+      print_args: true
+      print_outp: true
+      loop_break: true
+
+
+#  suites:
+#    default:
+#      contexts:
+#        /Users/macbookmac/PhpstormProjects/birzhaTech/features/admin:
+#          feature:
+#        emuse\BehatHTMLFormatter\Context\ScreenshotContext:
+#          screenshotDir: /Users/macbookmac/PhpstormProjects/birzhaTech/screenshots
+formatters:
+    html:
+    output_path: /Users/macbookmac/PhpstormProjects/birzhaTech
+
+
+
 
 
 

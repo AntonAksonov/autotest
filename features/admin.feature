@@ -1,4 +1,4 @@
-Feature: adminKO   ------------------------------------------------------------------------------------
+Feature: ADMIN
 
   Background:
 #    Then additional step navigate to {http://dev.birzha.tech}
@@ -8,7 +8,7 @@ Feature: adminKO   -------------------------------------------------------------
     And click /submit/
 
 
-  Scenario: menu, links, buttons
+  Scenario: CATEGORIES (create,edit,delete)
 
     Then check URL
 
@@ -32,15 +32,19 @@ Feature: adminKO   -------------------------------------------------------------
     And choose active status
     And edit /add_attribute/
     And edit in the name of attribute
-    Then click /save/
+    Then edit /save/
 
     Then check current URL
 
 
-#    Then add another category
-#    And delete it
+    Then add another category
+    And delete it
 
 #    Then check if search is working
+
+
+
+  Scenario: AUCTION (create,edit,delete)
 
     Then click /pushmenu/
     And click /auctions/
@@ -50,7 +54,7 @@ Feature: adminKO   -------------------------------------------------------------
     And fill in item name
     And fill in description
     And choose category
-    And choose active status
+    And choose auction active status
     And choose buy or sell
     And choose type
     And fill in price
