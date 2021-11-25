@@ -154,27 +154,52 @@ Feature: ADMIN
     Then click /save/ auction
     And delete this auction
 #    Then check if search is working
+  Scenario: USERS
 
-#    Then click /pushmenu/
+    Then click /pushmenu/
+    And click /users/
+    Then click on user to edit it`s info
+    Then fill in full name
+    Then fill in short name
+    Then fill in docwork name
+    Then fill in docpower name
+    Then fill in docpower name
+    Then fill in email
+    Then fill in ipn
+    Then fill in erdpou
+    Then fill in main phone
+    Then fill in second phone
+    Then fill in main country
+    Then fill in main region
+    Then fill in main city
+    Then fill in main district
+    Then fill in main street
+    Then fill in main building
+    Then fill in main appartment
+    Then fill in main zip code
 
-#    And click /users/
-#    Then click on user to edit it`s info
-#    Then fill in email
-#    Then fill in password
-#    Then choose user role
-#    Then choose user type
-#    Then fill in first name
-#    Then fill in second name
-#    Then fill in last name
-#    Then fill in ECP
-#    Then fill in index
-#    Then fill in adress
-#    Then fill in phone number
-#    Then fill in bank name
-#    Then fill in MFO
-#    Then fill in account number
-#    Then fill in SWIFT
-#    Then fill in your office
+    Then fill in additional country
+    Then fill in additional region
+    Then fill in additional city
+    Then fill in additional district
+    Then fill in additional street
+    Then fill in additional building
+    Then fill in additional appartment
+    Then fill in additional zip code
+    Then choose user role
+    Then fill in bank name
+    Then fill in bank adress
+    Then fill in account number
+    Then fill in MFO
+    Then fill in SWIFT
+    Then fill in executive name
+    Then fill in passport from
+    Then fill in passport start date
+    Then fill in passport serial number
+    Then add picture
+    Then submit
+
+#
 #    Then fill in representative
 #    Then click /save/
 #

@@ -3632,13 +3632,7 @@ class FeatureContext extends RawMinkContext implements Context
     public function clickUsers()
     {
         try {
-            $page = $this->getSession()->getPage();
-            $element = $page->findAll('xpath', '/html/body/div[2]/aside[1]/div/div[4]/div/div/nav/ul/li[3]/a');
-            foreach ($element as $item) {
-                if ($item->isVisible()) {
-                    $item->click();
-                }
-            }
+            $this->getSession()->getPage()->find('xpath', '//aside//li[3]/a')->click();
             echo 'You are here -> ' . $this->getSession()->getCurrentUrl();
         } catch (Error | Exception $e) {
             echo "FAILED |" . $e->getMessage();
@@ -3823,7 +3817,6 @@ class FeatureContext extends RawMinkContext implements Context
     public function deleteIt()
     {
         try {
-
             $page = $this->getSession()->getPage();
             $page->find('css', '#checkbox')->click();
             $page->find('css', '#delete')->click();
@@ -4280,16 +4273,13 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function clickOnNewAuctionToEditIt()
     {
-        throw new PendingException();
-    }
-
-    /**
-     * @Then add another auction
-     */
-    public
-    function addAnotherAuction()
-    {
-        throw new PendingException();
+        try {
+            $this->getSession()->getPage()->find('css', '#edit')->click();
+            echo 'You are here -> ' . $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo "FAILED |" . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . date("d-m-Y H:i") . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4298,7 +4288,15 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function deleteThisAuction()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $page->find('css', '#checkbox')->click();
+            $page->find('css', '#delete')->click();
+            echo 'SUCCESS, AUCTION DELETED';
+        } catch (Error | Exception $e) {
+            echo "FAILED |" . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . date("d-m-Y H:i") . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
@@ -4307,23 +4305,26 @@ class FeatureContext extends RawMinkContext implements Context
     public
     function clickOnUserToEditItSInfo()
     {
-        throw new PendingException();
+        try {
+            $page = $this->getSession()->getPage();
+            $page->find('css', '#email_user')->click();
+            echo 'You are here -> ' . $this->getSession()->getCurrentUrl();
+        } catch (Error | Exception $e) {
+            echo "FAILED |" . $e->getMessage();
+            file_put_contents('screenshots/' . $e->getMessage() . "." . date("d-m-Y H:i") . '.png', $this->getSession()->getDriver()->getScreenshot());
+        }
     }
 
     /**
-     * @Then fill in email
+     * @Then fill in full name
      */
     public
     function fillInEmail()
     {
         try {
-            $page = $this->getSession()->getPage();
-            $element = $page->find('css', '#admin_category_name');
-            if ($element->isVisible()) {
-                $element->setValue(Faker\Factory::create()->userName);
-            } else {
-                echo 'NOT FOUND';
-            }
+            $el = $this->getSession()->getPage()->find('css', '#profile_fiz_form_docNames');
+            $el->setValue(Faker\Factory::create()->userName);
+            echo $el->getValue();
         } catch (Error | Exception $e) {
             echo "FAILED |" . $e->getMessage();
             file_put_contents('screenshots/' . $e->getMessage() . "." . date("d-m-Y H:i") . '.png', $this->getSession()->getDriver()->getScreenshot());
@@ -4796,5 +4797,253 @@ class FeatureContext extends RawMinkContext implements Context
             echo "FAILED |" . $e->getMessage();
             file_put_contents('screenshots/' . $e->getMessage() . "." . date("d-m-Y H:i") . '.png', $this->getSession()->getDriver()->getScreenshot());
         }
+    }
+
+    /**
+     * @Then fill in short name
+     */
+    public function fillInShortName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in docwork name
+     */
+    public function fillInDocworkName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in docpower name
+     */
+    public function fillInDocpowerName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in email
+     */
+    public function fillInEmail2()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in ipn
+     */
+    public function fillInIpn()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in erdpou
+     */
+    public function fillInErdpou()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main phone
+     */
+    public function fillInMainPhone()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in second phone
+     */
+    public function fillInSecondPhone()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main country
+     */
+    public function fillInMainCountry()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main region
+     */
+    public function fillInMainRegion()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main city
+     */
+    public function fillInMainCity()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main district
+     */
+    public function fillInMainDistrict()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main street
+     */
+    public function fillInMainStreet()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main building
+     */
+    public function fillInMainBuilding()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main appartment
+     */
+    public function fillInMainAppartment()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in main zip code
+     */
+    public function fillInMainZipCode()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional country
+     */
+    public function fillInAdditionalCountry()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional region
+     */
+    public function fillInAdditionalRegion()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional city
+     */
+    public function fillInAdditionalCity()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional district
+     */
+    public function fillInAdditionalDistrict()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional street
+     */
+    public function fillInAdditionalStreet()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional building
+     */
+    public function fillInAdditionalBuilding()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional appartment
+     */
+    public function fillInAdditionalAppartment()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in additional zip code
+     */
+    public function fillInAdditionalZipCode()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in bank adress
+     */
+    public function fillInBankAdress()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in executive name
+     */
+    public function fillInExecutiveName()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in passport from
+     */
+    public function fillInPassportFrom()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in passport start date
+     */
+    public function fillInPassportStartDate()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then fill in passport serial number
+     */
+    public function fillInPassportSerialNumber()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then add picture
+     */
+    public function addPicture()
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then submit
+     */
+    public function submit()
+    {
+        throw new PendingException();
     }
 }
