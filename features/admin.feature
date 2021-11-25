@@ -1,22 +1,16 @@
 Feature: ADMIN
 
   Background:
-#    Then additional step navigate to {http://dev.birzha.tech}
     Given navigate to {http://dev.birzha.tech/admin/login}
     And fill the /inputLogin/
     And fill the /inputPassword/
     And click /submit/
 
-
   Scenario: CREATE CATEGORY
 
     Then check URL
-
     Then click /pushmenu/
-#    And check all links status codes
-
-  Then click /categories/
-
+    Then click /categories/
     Then click /add/
     Then fill in category name
     And choose active status
@@ -29,19 +23,17 @@ Feature: ADMIN
     Then click /pushmenu/
     Then click /categories/
     Then check current URL
-#    And check if new category is added
-
     Then click edit on new category
     Then fill in category name
     And choose active status
     And edit /add_attribute/
     And edit in the name of attribute
     Then edit /save/
-
     Then check current URL
 
   Scenario: CREATE AND DELETE CATEGORY
-#    Then add another category
+
+    Then add another category
     Then click /pushmenu/
     Then click /categories/
     Then check current URL
@@ -52,16 +44,12 @@ Feature: ADMIN
     And fill in the name of attribute
     Then click /save/
     And delete it
-
 #    Then check if search is working
-
-
 
   Scenario: CREATE AUCTION
 
     Then click /pushmenu/
     And click /auctions/
-
     Then click /add/
     Then fill in auction name
     And fill in item name
@@ -90,18 +78,15 @@ Feature: ADMIN
     And check in hide author checkbox
     And fill in clients list
     And attach image file
-#    And click /add image/
+    And click /add image/
     Then click /save/ auction
     Then click /save/ auction
-#    Then click /save/ auction
-#    Then click /save/ auction
 #    Then screenshot
 
   Scenario: EDIT AUCTION
 
     Then check current URL
-    And check if new auction is added
-
+#    And check if new auction is added
     Then click on new auction to edit it
     Then fill in auction name
     And fill in item name
@@ -131,15 +116,12 @@ Feature: ADMIN
     And attach image file
     And click /add image/
     Then click /save/
-
     Then check current URL
-
 
   Scenario: CREATE AND DELETE AUCTION
 
     Then click /pushmenu/
     And click /auctions/
-
     Then click /add/
     Then fill in auction name
     And fill in item name
@@ -171,7 +153,6 @@ Feature: ADMIN
     And click /add image/
     Then click /save/ auction
     And delete this auction
-
 #    Then check if search is working
 
 #    Then click /pushmenu/
